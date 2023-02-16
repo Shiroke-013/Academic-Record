@@ -2,10 +2,10 @@ package com.java.model;
 
 import java.time.LocalDate;
 
-public class Course {
+public class Course extends BaseEntity{
 
     private String courseName;
-    private int numberOfStudents;
+    private Integer numberOfStudents;
     private LocalDate courseStart;
     private LocalDate courseEnd;
 

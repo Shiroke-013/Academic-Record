@@ -3,11 +3,11 @@ package com.java.model;
 import java.sql.Time;
 import java.time.LocalTime;
 
-public class Subject {
+public class Subject extends BaseEntity{
 
     private String subjectName;
     private Time duration;
-    private int capacity;
+    private Integer capacity;
     private LocalTime startDate;
     private LocalTime endDate;
     private Professor professor;
@@ -28,11 +28,11 @@ public class Subject {
         this.duration = duration;
     }
 
-    public int getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 

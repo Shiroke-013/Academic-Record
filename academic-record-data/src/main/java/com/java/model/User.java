@@ -1,6 +1,6 @@
 package com.java.model;
 
-public class User {
+public class User extends BaseEntity{
     private String firsName;
     private String lastName;
     private String email;

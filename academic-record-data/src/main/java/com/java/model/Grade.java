@@ -1,14 +1,14 @@
 package com.java.model;
 
-public class Grade {
+public class Grade extends BaseEntity{
 
-    private int calification;
+    private Integer calification;
 
-    public int getCalification() {
+    public Integer getCalification() {
         return calification;
     }
 
-    public void setCalification(int calification) {
+    public void setCalification(Integer calification) {
         this.calification = calification;
     }
 }
