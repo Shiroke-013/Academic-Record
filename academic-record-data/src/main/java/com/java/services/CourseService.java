@@ -1,4 +1,6 @@
 package com.java.services;
 
-public interface CourseService {
+import com.java.model.Course;
+
+public interface CourseService extends CrudService<Course, Integer> {
 }

@@ -1,5 +1,7 @@
 package com.java.services;
 
-public interface SubjectService {
+import com.java.model.Subject;
+
+public interface SubjectService extends CrudService<Subject, Integer> {
 
 }
