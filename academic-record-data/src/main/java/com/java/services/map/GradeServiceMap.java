@@ -2,10 +2,11 @@ package com.java.services.map;
 
 import com.java.model.Grade;
 import com.java.services.CrudService;
+import com.java.services.GradeService;
 
 import java.util.Set;
 
-public class GradeServiceMap extends AbstractMapService<Grade, Integer> implements CrudService<Grade, Integer> {
+public class GradeServiceMap extends AbstractMapService<Grade, Integer> implements GradeService {
 
     @Override
     public Set<Grade> findAll() {

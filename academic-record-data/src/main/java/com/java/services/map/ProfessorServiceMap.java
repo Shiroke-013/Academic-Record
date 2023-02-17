@@ -1,11 +1,15 @@
 package com.java.services.map;
 
 import com.java.model.Professor;
-import com.java.services.CrudService;
+import com.java.services.ProfessorService;
 
 import java.util.Set;
 
-public class ProfessorServiceMap extends AbstractMapService<Professor, Integer> implements CrudService<Professor, Integer> {
+public class ProfessorServiceMap extends AbstractMapService<Professor, Integer> implements ProfessorService {
+    @Override
+    public Professor findByLastName(String lastName) {
+        return null;
+    }
 
     @Override
     public Set<Professor> findAll() {

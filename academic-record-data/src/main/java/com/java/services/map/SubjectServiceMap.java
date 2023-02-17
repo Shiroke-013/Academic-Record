@@ -1,11 +1,11 @@
 package com.java.services.map;
 
 import com.java.model.Subject;
-import com.java.services.CrudService;
+import com.java.services.SubjectService;
 
 import java.util.Set;
 
-public class SubjectServiceMap extends AbstractMapService<Subject, Integer> implements CrudService<Subject, Integer> {
+public class SubjectServiceMap extends AbstractMapService<Subject, Integer> implements SubjectService {
 
     @Override
     public Set<Subject> findAll() {

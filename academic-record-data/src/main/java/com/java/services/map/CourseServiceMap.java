@@ -1,11 +1,11 @@
 package com.java.services.map;
 
 import com.java.model.Course;
-import com.java.services.CrudService;
+import com.java.services.CourseService;
 
 import java.util.Set;
 
-public class CourseServiceMap extends AbstractMapService<Course, Integer> implements CrudService<Course, Integer> {
+public class CourseServiceMap extends AbstractMapService<Course, Integer> implements CourseService {
 
     @Override
     public Set<Course> findAll() {
@@ -31,4 +31,6 @@ public class CourseServiceMap extends AbstractMapService<Course, Integer> implem
     public void deleteById(Integer id) {
         super.deleteById(id);
     }
+
+
 }

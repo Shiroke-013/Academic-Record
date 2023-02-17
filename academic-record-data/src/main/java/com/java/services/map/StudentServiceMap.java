@@ -1,11 +1,16 @@
 package com.java.services.map;
 
 import com.java.model.Student;
-import com.java.services.CrudService;
+import com.java.services.StudentService;
 
 import java.util.Set;
 
-public class StudentServiceMap extends AbstractMapService<Student, Integer> implements CrudService<Student, Integer> {
+public class StudentServiceMap extends AbstractMapService<Student, Integer> implements StudentService {
+
+    @Override
+    public Student findByLastName(String lastName) {
+        return null;
+    }
 
     @Override
     public Set<Student> findAll() {
