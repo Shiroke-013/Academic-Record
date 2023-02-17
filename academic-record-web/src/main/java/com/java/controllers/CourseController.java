@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CourseController {
 
-    @RequestMapping({"/", "/list", "/list.html"})
+    @RequestMapping({"", "/", "/list", "/list.html"})
     public String courseList(){
         return "courses/list";
     }
