@@ -21,7 +21,7 @@ public class GradeServiceMap extends AbstractMapService<Grade, Integer> implemen
 
     @Override
     public Grade save(Grade object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override

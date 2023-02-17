@@ -21,7 +21,7 @@ public class SubjectServiceMap extends AbstractMapService<Subject, Integer> impl
 
     @Override
     public Subject save(Subject object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override

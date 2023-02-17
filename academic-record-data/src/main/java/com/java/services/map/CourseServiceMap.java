@@ -21,7 +21,7 @@ public class CourseServiceMap extends AbstractMapService<Course, Integer> implem
 
     @Override
     public Course save(Course object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override

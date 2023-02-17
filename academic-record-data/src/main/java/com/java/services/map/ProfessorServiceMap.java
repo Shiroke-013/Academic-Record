@@ -25,7 +25,7 @@ public class ProfessorServiceMap extends AbstractMapService<Professor, Integer> 
 
     @Override
     public Professor save(Professor object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override

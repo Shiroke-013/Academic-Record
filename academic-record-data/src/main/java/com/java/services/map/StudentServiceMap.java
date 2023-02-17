@@ -26,7 +26,7 @@ public class StudentServiceMap extends AbstractMapService<Student, Integer> impl
 
     @Override
     public Student save(Student object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override
