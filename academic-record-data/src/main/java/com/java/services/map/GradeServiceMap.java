@@ -1,11 +1,12 @@
 package com.java.services.map;
 
 import com.java.model.Grade;
-import com.java.services.CrudService;
 import com.java.services.GradeService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class GradeServiceMap extends AbstractMapService<Grade, Integer> implements GradeService {
 
     @Override

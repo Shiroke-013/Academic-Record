@@ -2,9 +2,11 @@ package com.java.services.map;
 
 import com.java.model.Subject;
 import com.java.services.SubjectService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class SubjectServiceMap extends AbstractMapService<Subject, Integer> implements SubjectService {
 
     @Override

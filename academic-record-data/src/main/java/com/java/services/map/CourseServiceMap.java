@@ -2,9 +2,11 @@ package com.java.services.map;
 
 import com.java.model.Course;
 import com.java.services.CourseService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class CourseServiceMap extends AbstractMapService<Course, Integer> implements CourseService {
 
     @Override

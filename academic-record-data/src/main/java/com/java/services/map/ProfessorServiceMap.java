@@ -2,9 +2,11 @@ package com.java.services.map;
 
 import com.java.model.Professor;
 import com.java.services.ProfessorService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class ProfessorServiceMap extends AbstractMapService<Professor, Integer> implements ProfessorService {
     @Override
     public Professor findByLastName(String lastName) {

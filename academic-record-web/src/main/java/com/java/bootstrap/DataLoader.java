@@ -4,8 +4,6 @@ import com.java.model.Course;
 import com.java.model.Professor;
 import com.java.services.CourseService;
 import com.java.services.ProfessorService;
-import com.java.services.map.CourseServiceMap;
-import com.java.services.map.ProfessorServiceMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +13,10 @@ public class DataLoader implements CommandLineRunner {
     private final CourseService courseService;
     private final ProfessorService professorService;
 
-    public DataLoader() {
-        courseService = new CourseServiceMap();
-        professorService = new ProfessorServiceMap();
+    public DataLoader(CourseService courseService, ProfessorService professorService) {
+
+        this.courseService = courseService;
+        this.professorService = professorService;
     }
 
     @Override
