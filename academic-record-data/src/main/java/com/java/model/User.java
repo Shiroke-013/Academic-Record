@@ -1,5 +1,8 @@
 package com.java.model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class User extends BaseEntity{
     private String firsName;
     private String lastName;

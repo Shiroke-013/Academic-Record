@@ -1,8 +1,12 @@
 package com.java.model;
 
+import jakarta.persistence.Entity;
+
 import java.sql.Time;
 import java.time.LocalTime;
+import java.util.Set;
 
+@Entity
 public class Subject extends BaseEntity{
 
     private String subjectName;
@@ -11,6 +15,7 @@ public class Subject extends BaseEntity{
     private LocalTime startDate;
     private LocalTime endDate;
     private Professor professor;
+    private Set<Student> students;
 
     public String getSubjectName() {
         return subjectName;
@@ -58,5 +63,13 @@ public class Subject extends BaseEntity{
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

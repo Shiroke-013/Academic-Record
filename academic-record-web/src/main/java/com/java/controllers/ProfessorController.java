@@ -1,25 +1,24 @@
 package com.java.controllers;
 
+import com.java.model.Professor;
 import com.java.services.ProfessorService;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/professors")
-@Controller
+import java.util.Set;
+
+@RequestMapping("/professor")
+@RestController
 public class ProfessorController {
 
-    private final ProfessorService professorService;
+    @Autowired
+    private ProfessorService professorService;
 
-    public ProfessorController(ProfessorService professorService) {
-        this.professorService = professorService;
-    }
-
-    @RequestMapping({"", "/", "/list", "/list.html"})
-    public String professorList(Model model){
-
-        model.addAttribute("professors", professorService.findAll());
-
-        return "professors/list";
+    @GetMapping
+    public Set<Professor> findAll(Model model){
+        return professorService.findAll();
     }
 }

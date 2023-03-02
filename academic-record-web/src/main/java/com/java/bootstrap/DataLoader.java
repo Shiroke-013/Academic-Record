@@ -22,20 +22,6 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Professor professor1 = new Professor();
-        professor1.setFirsName("Juan");
-        professor1.setLastName("McCormick");
-
-        professorService.save(professor1);
-
-        Professor professor2 = new Professor();
-        professor2.setFirsName("Daniel");
-        professor2.setLastName("Correa");
-
-        professorService.save(professor2);
-
-        System.out.println("Loaded Professors....");
-
         Course course1 = new Course();
         course1.setCourseName("Computer Science");
         course1.setNumberOfStudents(0);

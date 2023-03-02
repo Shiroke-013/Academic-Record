@@ -1,6 +1,7 @@
 package com.java.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class Course extends BaseEntity{
 
@@ -8,6 +9,7 @@ public class Course extends BaseEntity{
     private Integer numberOfStudents;
     private LocalDate courseStart;
     private LocalDate courseEnd;
+    private Set<Student> students;
 
     public String getCourseName() {
         return courseName;
@@ -17,11 +19,11 @@ public class Course extends BaseEntity{
         this.courseName = courseName;
     }
 
-    public int getNumberOfStudents() {
+    public Integer getNumberOfStudents() {
         return numberOfStudents;
     }
 
-    public void setNumberOfStudents(int numberOfStudents) {
+    public void setNumberOfStudents(Integer numberOfStudents) {
         this.numberOfStudents = numberOfStudents;
     }
 
@@ -39,5 +41,13 @@ public class Course extends BaseEntity{
 
     public void setCourseEnd(LocalDate courseEnd) {
         this.courseEnd = courseEnd;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

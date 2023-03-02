@@ -1,25 +1,24 @@
 package com.java.controllers;
 
+import com.java.model.Course;
 import com.java.services.CourseService;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/courses")
-@Controller
+import java.util.Set;
+
+@RequestMapping("/course")
+@RestController
 public class CourseController {
 
-    private final CourseService courseService;
+    @Autowired
+    private CourseService courseService;
 
-    public CourseController(CourseService courseService) {
-        this.courseService = courseService;
-    }
-
-    @RequestMapping({"", "/", "/list", "/list.html"})
-    public String courseList(Model model){
-
-        model.addAttribute("courses", courseService.findAll());
-
-        return "courses/list";
+    @GetMapping
+    public Set<Course> courseList(Model model){
+        return courseService.findAll();
     }
 }
