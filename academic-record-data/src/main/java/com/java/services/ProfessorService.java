@@ -7,4 +7,6 @@ public interface ProfessorService extends CrudService<Professor, Integer> {
 
     Professor findByLastName(String lastName);
 
+    void update(Professor professor, Integer id);
+
 }

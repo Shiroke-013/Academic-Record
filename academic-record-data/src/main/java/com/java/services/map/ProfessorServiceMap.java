@@ -2,12 +2,14 @@ package com.java.services.map;
 
 import com.java.model.Professor;
 import com.java.services.ProfessorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
 public class ProfessorServiceMap extends AbstractMapService<Professor, Integer> implements ProfessorService {
+
     @Override
     public Professor findByLastName(String lastName) {
         return null;
@@ -36,5 +38,16 @@ public class ProfessorServiceMap extends AbstractMapService<Professor, Integer> 
     @Override
     public void deleteById(Integer id) {
         super.deleteById(id);
+    }
+
+    @Override
+    public void update(Professor professor, Integer id) {
+        Professor oldProfessor = super.findById(id);
+        if (oldProfessor.getId() != null) {
+            oldProfessor.setFirstName(professor.getFirstName());
+            oldProfessor.setLastName(professor.getLastName());
+            oldProfessor.setEmail(professor.getEmail());
+            oldProfessor.setPassword(professor.getPassword());
+        }
     }
 }
