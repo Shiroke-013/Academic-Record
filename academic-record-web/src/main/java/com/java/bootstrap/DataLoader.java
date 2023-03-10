@@ -1,9 +1,8 @@
 package com.java.bootstrap;
 
 import com.java.model.Course;
-import com.java.model.Professor;
-import com.java.services.CourseService;
-import com.java.services.ProfessorService;
+import com.java.service.CourseService;
+import com.java.service.ProfessorService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
