@@ -1,4 +1,4 @@
-package com.java.services.map;
+package com.java.services.impl;
 
 import com.java.model.BaseEntity;
 

@@ -1,4 +1,4 @@
-package com.java.services.map;
+package com.java.services.impl;
 
 import com.java.model.Course;
 import com.java.services.CourseService;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class CourseServiceMap extends AbstractMapService<Course, Integer> implements CourseService {
+public class CourseServiceImpl extends AbstractMapService<Course, Integer> implements CourseService {
 
     @Override
     public Set<Course> findAll() {

@@ -1,4 +1,4 @@
-package com.java.services.map;
+package com.java.services.impl;
 
 import com.java.model.Grade;
 import com.java.services.GradeService;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class GradeServiceMap extends AbstractMapService<Grade, Integer> implements GradeService {
+public class GradeServiceImpl extends AbstractMapService<Grade, Integer> implements GradeService {
 
     @Override
     public Set<Grade> findAll() {

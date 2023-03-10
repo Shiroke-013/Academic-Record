@@ -1,4 +1,4 @@
-package com.java.services.map;
+package com.java.services.impl;
 
 import com.java.model.Subject;
 import com.java.services.SubjectService;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class SubjectServiceMap extends AbstractMapService<Subject, Integer> implements SubjectService {
+public class SubjectServiceImpl extends AbstractMapService<Subject, Integer> implements SubjectService {
 
     @Override
     public Set<Subject> findAll() {

@@ -1,14 +1,13 @@
-package com.java.services.map;
+package com.java.services.impl;
 
 import com.java.model.Professor;
 import com.java.services.ProfessorService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class ProfessorServiceMap extends AbstractMapService<Professor, Integer> implements ProfessorService {
+public class ProfessorServiceImpl extends AbstractMapService<Professor, Integer> implements ProfessorService {
 
     @Override
     public Professor findByLastName(String lastName) {
