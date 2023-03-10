@@ -3,13 +3,13 @@ package com.java.persistence;
 import com.java.dto.ProfessorDto;
 import com.java.model.Professor;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface ProfessorPersistence {
 
     void createProfessor(Professor professor);
 
-    Set<Professor> getAllProfessor();
+    Collection<Professor> getAllProfessor();
 
     Professor findProfessorById(Integer id);
 

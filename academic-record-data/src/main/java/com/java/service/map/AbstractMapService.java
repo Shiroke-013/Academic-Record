@@ -4,7 +4,7 @@ import com.java.model.BaseEntity;
 
 import java.util.*;
 
-public abstract class AbstractMapService<T extends BaseEntity, ID extends Integer> {
+public abstract class AbstractMapService<T extends BaseEntity, I extends Integer> {
 
     protected Map<Integer, T> map = new HashMap<>();
 
@@ -12,7 +12,7 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Intege
         return new HashSet<>(map.values());
     }
 
-    T findById(ID id) {
+    T findById(I id) {
         return map.get(id);
     }
 
@@ -31,7 +31,7 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Intege
         return object;
     }
 
-    void deleteById(ID id){
+    void deleteById(I id){
         map.remove(id);
     }
 

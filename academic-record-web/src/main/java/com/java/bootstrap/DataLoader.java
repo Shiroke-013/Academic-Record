@@ -2,7 +2,6 @@ package com.java.bootstrap;
 
 import com.java.model.Course;
 import com.java.service.CourseService;
-import com.java.service.ProfessorService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,12 +9,10 @@ import org.springframework.stereotype.Component;
 public class DataLoader implements CommandLineRunner {
 
     private final CourseService courseService;
-    private final ProfessorService professorService;
 
-    public DataLoader(CourseService courseService, ProfessorService professorService) {
+    public DataLoader(CourseService courseService) {
 
         this.courseService = courseService;
-        this.professorService = professorService;
     }
 
     @Override
@@ -33,6 +30,5 @@ public class DataLoader implements CommandLineRunner {
 
         courseService.save(course2);
 
-        System.out.println("Loaded Courses....");
     }
 }
