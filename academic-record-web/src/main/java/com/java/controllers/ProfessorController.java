@@ -1,7 +1,9 @@
 package com.java.controllers;
 
+import com.java.dto.ProfessorDto;
 import com.java.model.Professor;
-import com.java.services.ProfessorService;
+import com.java.service.ExceptionService;
+import com.java.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,24 +29,36 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @GetMapping
-    public Set<Professor> findAll(Model model){
-        return professorService.findAll();
+    public ResponseEntity<Set<Professor>> findAll(Model model) throws ExceptionService {
+        try {
+            return new ResponseEntity<>(professorService.findAll(), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            throw new ExceptionService("Not Found");
+        }
     }
 
     @GetMapping("{id}")
-    public Professor findById(@PathVariable Integer id){
-        return professorService.findById(id);
+    public ResponseEntity<?> findById(@PathVariable Integer id){
+        try {
+            return new ResponseEntity<>(professorService.findById(id), HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Professor with id: " + id + " not found.", HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
-    public String save(@RequestBody Professor professor){
-        professorService.save(professor);
-        return "Success";
+    public ResponseEntity<?> save(@RequestBody ProfessorDto professorDto){
+        try {
+            professorService.save(professorDto);
+            return new ResponseEntity<>("Professor created.", HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>("Professor could not be created.", HttpStatus.CONFLICT);
+        }
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteById(@PathVariable Integer id) {
-        String message = "Professor with id";
+        String message = "Professor with id: ";
         try {
             professorService.findById(id);
             professorService.deleteById(id);

@@ -1,15 +1,17 @@
-package com.java.services;
+package com.java.service;
 
+import com.java.dto.ProfessorDto;
 import com.java.model.Professor;
+
 import java.util.Set;
 
 public interface ProfessorService<T> {
 
-    T save(Professor professor) throws ExceptionService;
+    T save(ProfessorDto professorDto) throws ExceptionService;
 
-    Set<Professor> findAll();
+    T findById(Integer id);
 
-    Professor findById(Integer id);
+    Set<T> findAll();
 
     void delete();
 

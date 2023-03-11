@@ -1,8 +1,10 @@
 package com.java.model;
 
+import jakarta.persistence.Entity;
+
 import java.time.LocalDate;
 
-
+@Entity
 public class Course extends BaseEntity{
 
     private String courseName;

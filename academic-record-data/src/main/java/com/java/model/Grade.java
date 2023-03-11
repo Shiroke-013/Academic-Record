@@ -1,5 +1,9 @@
 package com.java.model;
 
+
+import jakarta.persistence.Entity;
+
+@Entity
 public class Grade extends BaseEntity{
 
     private Integer calification;

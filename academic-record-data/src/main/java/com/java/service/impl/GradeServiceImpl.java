@@ -1,7 +1,8 @@
-package com.java.services.impl;
+package com.java.service.impl;
+
 
 import com.java.model.Grade;
-import com.java.services.GradeService;
+import com.java.service.GradeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

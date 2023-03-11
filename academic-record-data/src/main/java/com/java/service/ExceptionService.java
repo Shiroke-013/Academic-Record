@@ -1,4 +1,4 @@
-package com.java.services;
+package com.java.service;
 
 public class ExceptionService extends Exception {
 

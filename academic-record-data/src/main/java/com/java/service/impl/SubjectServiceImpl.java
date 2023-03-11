@@ -1,7 +1,7 @@
-package com.java.services.impl;
+package com.java.service.impl;
 
 import com.java.model.Subject;
-import com.java.services.SubjectService;
+import com.java.service.SubjectService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

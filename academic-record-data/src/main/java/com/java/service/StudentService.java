@@ -1,7 +1,6 @@
-package com.java.services;
+package com.java.service;
 
 import com.java.model.Student;
-import java.util.Set;
 
 public interface StudentService extends CrudService<Student, Integer> {
 

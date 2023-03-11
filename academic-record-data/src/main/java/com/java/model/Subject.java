@@ -15,6 +15,7 @@ public class Subject extends BaseEntity{
     private LocalTime startDate;
     private LocalTime endDate;
     private Professor professor;
+    //private Set<Student> students;
 
     public String getSubjectName() {
         return subjectName;
