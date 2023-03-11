@@ -54,7 +54,8 @@ public class ProfessorController {
         }
     }
 
-    @PatchMapping()
+    @PatchMapping("{id}")
+
 
     @PutMapping("{id}")
     public ResponseEntity<String> update(@RequestBody Professor professor, @PathVariable Integer id){

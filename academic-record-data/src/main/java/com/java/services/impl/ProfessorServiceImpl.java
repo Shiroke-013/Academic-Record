@@ -1,47 +1,47 @@
 package com.java.services.impl;
 
 import com.java.model.Professor;
+import com.java.services.ExceptionService;
 import com.java.services.ProfessorService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class ProfessorServiceImpl extends AbstractMapService<Professor, Integer> implements ProfessorService {
+public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
-    public Professor findByLastName(String lastName) {
-        return null;
+    public Professor save(Professor professor) throws ExceptionService {
+        try {
+
+        } catch (Exception e){
+            throw new ExceptionService(e.getMessage());
+        }
     }
 
     @Override
     public Set<Professor> findAll() {
-        return super.findAll();
+        return null;
     }
 
     @Override
     public Professor findById(Integer id) {
-        return super.findById(id);
+        return null;
     }
 
     @Override
-    public Professor save(Professor object) {
-        return super.save(object);
-    }
+    public void delete() {
 
-    @Override
-    public void delete(Professor object) {
-        super.delete(object);
     }
 
     @Override
     public void deleteById(Integer id) {
-        super.deleteById(id);
+
     }
 
     @Override
     public void update(Professor professor, Integer id) {
-        Professor oldProfessor = super.findById(id);
+        Professor oldProfessor = .findById(id);
         if (oldProfessor.getId() != null) {
             oldProfessor.setFirstName(professor.getFirstName());
             oldProfessor.setLastName(professor.getLastName());
