@@ -15,7 +15,7 @@ public class Subject extends BaseEntity{
     private LocalTime startDate;
     private LocalTime endDate;
     private Professor professor;
-    private Set<Student> students;
+    //private Set<Student> students;
 
     public String getSubjectName() {
         return subjectName;
@@ -65,11 +65,4 @@ public class Subject extends BaseEntity{
         this.professor = professor;
     }
 
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
 }

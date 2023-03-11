@@ -1,9 +1,22 @@
 package com.java.service;
 
+import com.java.dto.ProfessorDto;
 import com.java.model.Professor;
 
-public interface ProfessorService extends CrudService<Professor, Integer> {
+import java.util.Set;
 
-    Professor findByLastName(String lastName);
+public interface ProfessorService<T> {
+
+    T save(ProfessorDto professorDto) throws ExceptionService;
+
+    T findById(Integer id);
+
+    Set<T> findAll();
+
+    void delete();
+
+    void deleteById(Integer id);
+
+    void update(Professor professor, Integer id);
 
 }

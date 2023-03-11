@@ -1,26 +1,33 @@
 package com.java.model;
 
+import com.java.dto.ProfessorDto;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
+import java.util.Date;
 import java.util.Set;
 
 
 @Entity
 public class Professor extends User {
 
-    private Set<Subject> subjects;
-
-    public Professor(String name, String lastname, Set<Subject> subjects) {
-        this.setFirsName(name);
-        this.setLastName(lastname);
-        this.subjects = subjects;
+    public Professor(Integer id, ProfessorDto professorDto, Date createdAt) {
+        this.setId(id);
+        this.setFirstName(professorDto.getFirstName());
+        this.setLastName(professorDto.getLastName());
+        this.setEmail(professorDto.getEmail());
+        this.setPassword(professorDto.getPassword());
+        this.setCreatedAt(createdAt);
     }
 
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
+    //@OneToMany
+    //private Set<Subject> subjects;
 
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
+    //public Set<Subject> getSubjects() {
+      //  return subjects;
+    //}
+
+   // public void setSubjects(Set<Subject> subjects) {
+        //this.subjects = subjects;
+    //}
 }

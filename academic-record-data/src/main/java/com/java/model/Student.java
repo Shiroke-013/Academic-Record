@@ -8,7 +8,8 @@ import java.util.Set;
 public class Student extends User {
 
     private Course course;
-    private Set<Subject> subjects;
+
+    //private Set<Subject> subjects;
 
     public Course getCourse() {
         return course;
@@ -18,11 +19,11 @@ public class Student extends User {
         this.course = course;
     }
 
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
+    //public Set<Subject> getSubjects() {
+      //  return subjects;
+    //}
 
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
+    //public void setSubjects(Set<Subject> subjects) {
+      //  this.subjects = subjects;
+    //}
 }

@@ -4,17 +4,18 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class User extends BaseEntity{
-    private String firsName;
+
+    private String firstName;
     private String lastName;
     private String email;
     private String password;
 
-    public String getFirsName() {
-        return firsName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirsName(String firsName) {
-        this.firsName = firsName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

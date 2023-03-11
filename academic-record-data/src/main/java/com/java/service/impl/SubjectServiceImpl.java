@@ -1,31 +1,31 @@
-package com.java.service.map;
+package com.java.service.impl;
 
-import com.java.model.Grade;
-import com.java.service.GradeService;
+import com.java.model.Subject;
+import com.java.service.SubjectService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class GradeServiceMap extends AbstractMapService<Grade, Integer> implements GradeService {
+public class SubjectServiceImpl extends AbstractMapService<Subject, Integer> implements SubjectService {
 
     @Override
-    public Set<Grade> findAll() {
+    public Set<Subject> findAll() {
         return super.findAll();
     }
 
     @Override
-    public Grade findById(Integer id) {
+    public Subject findById(Integer id) {
         return super.findById(id);
     }
 
     @Override
-    public Grade save(Grade object) {
+    public Subject save(Subject object) {
         return super.save(object);
     }
 
     @Override
-    public void delete(Grade object) {
+    public void delete(Subject object) {
         super.delete(object);
     }
 

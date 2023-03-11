@@ -1,4 +1,4 @@
-package com.java.service.map;
+package com.java.service.impl;
 
 import com.java.model.Student;
 import com.java.service.StudentService;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class StudentServiceMap extends AbstractMapService<Student, Integer> implements StudentService {
+public class StudentServiceImpl extends AbstractMapService<Student, Integer> implements StudentService {
 
     @Override
     public Student findByLastName(String lastName) {
