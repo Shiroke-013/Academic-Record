@@ -7,15 +7,15 @@ import java.util.Set;
 
 public interface CoursePersistence {
 
-    void createCourse(Course course);
+    void create(Course course);
 
-    Set<Course> getAllCourse();
+    Set<Course> getAll();
 
-    Course findCourseById(Integer id);
+    Course findById(Integer id);
 
-    void deleteCourse(Integer id);
+    void delete(Integer id);
 
-    void deleteAllCourse();
+    void deleteAll();
 
-    void updateCourse(CourseDto courseDto, Integer id);
+    void update(CourseDto courseDto, Integer id);
 }

@@ -9,14 +9,14 @@ public interface ProfessorService<T> {
 
     T save(ProfessorDto professorDto) throws ExceptionService;
 
-    T findById(Integer id);
+    T findById(Integer id) throws ExceptionService;
 
-    Set<T> findAll();
+    Set<T> findAll() throws ExceptionService;
 
-    void delete();
+    void delete() throws ExceptionService;
 
-    void deleteById(Integer id);
+    void deleteById(Integer id) throws ExceptionService;
 
-    void update(Professor professor, Integer id);
+    void update(Professor professor, Integer id) throws ExceptionService;
 
 }

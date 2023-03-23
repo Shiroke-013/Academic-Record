@@ -7,15 +7,15 @@ import java.util.Set;
 
 public interface GradePersistence {
 
-    void createGrade(Grade grade);
+    void create(Grade grade);
 
-    Set<Grade> getAllGrade();
+    Set<Grade> getAll();
 
-    Grade findGradeById(Integer id);
+    Grade findById(Integer id);
 
-    void deleteGrade(Integer id);
+    void delete(Integer id);
 
-    void deleteAllGrade();
+    void deleteAll();
 
-    void updateGrade(GradeDto gradeDto, Integer id);
+    void update(GradeDto gradeDto, Integer id);
 }

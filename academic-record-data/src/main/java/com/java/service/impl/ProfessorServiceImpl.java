@@ -7,8 +7,9 @@ import com.java.service.ExceptionService;
 import com.java.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
+import java.util.Date;
+import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
@@ -21,7 +22,7 @@ public class ProfessorServiceImpl implements ProfessorService {
         try {
             Integer id = UUID.randomUUID().hashCode();
             Professor professor = new Professor(id, professorDto, new Date());
-            professorPersistence.createProfessor(professor);
+            professorPersistence.create(professor);
             return professor;
         } catch (Exception e){
             throw new ExceptionService(e.getMessage());
@@ -29,8 +30,12 @@ public class ProfessorServiceImpl implements ProfessorService {
     }
 
     @Override
-    public Set<Professor> findAll() {
-        return null;
+    public Set<Professor> findAll() throws ExceptionService {
+        try{
+            return (Set<Professor>) professorPersistence.getAll();
+        }catch (Exception e){
+            throw new ExceptionService(e.getMessage());
+        }
     }
 
     @Override
@@ -39,16 +44,25 @@ public class ProfessorServiceImpl implements ProfessorService {
     }
 
     @Override
-    public void delete() {
+    public void delete() throws ExceptionService {
+        try {
+            professorPersistence.deleteAll();
+        } catch (Exception e){
+            throw new ExceptionService(e.getMessage());
+        }
     }
 
     @Override
-    public void deleteById(Integer id) {
-
+    public void deleteById(Integer id) throws ExceptionService {
+        try {
+            professorPersistence.delete(id);
+        } catch (Exception e){
+            throw new ExceptionService(e.getMessage());
+        }
     }
 
     @Override
     public void update(Professor professor, Integer id) {
-
+        //Not yet...
     }
 }

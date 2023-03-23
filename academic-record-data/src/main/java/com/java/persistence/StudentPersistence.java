@@ -7,15 +7,15 @@ import java.util.Set;
 
 public interface StudentPersistence {
 
-    void createStudent(Student student);
+    void create(Student student);
 
-    Set<Student> getAllStudent();
+    Set<Student> getAll();
 
-    Student findStudentById(Integer id);
+    Student findById(Integer id);
 
-    void deleteStudent(Integer id);
+    void delete(Integer id);
 
-    void deleteAllStudent();
+    void deleteAll();
 
-    void updateStudent(StudentDto studentDto, Integer id);
+    void update(StudentDto studentDto, Integer id);
 }

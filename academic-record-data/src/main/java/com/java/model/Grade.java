@@ -2,7 +2,11 @@ package com.java.model;
 
 
 import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class Grade extends BaseEntity{
 
@@ -10,27 +14,4 @@ public class Grade extends BaseEntity{
     private Student student;
     private Subject subject;
 
-    public Integer getCalification() {
-        return calification;
-    }
-
-    public void setCalification(Integer calification) {
-        this.calification = calification;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
 }

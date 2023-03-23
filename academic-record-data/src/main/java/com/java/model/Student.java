@@ -1,29 +1,14 @@
 package com.java.model;
 
 import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Set;
-
+@Getter
+@Setter
 @Entity
 public class Student extends User {
 
     private Course course;
 
-    //private Set<Subject> subjects;
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    //public Set<Subject> getSubjects() {
-      //  return subjects;
-    //}
-
-    //public void setSubjects(Set<Subject> subjects) {
-      //  this.subjects = subjects;
-    //}
 }

@@ -7,16 +7,16 @@ import java.util.Set;
 
 public interface SubjectPersistence {
 
-    void createSubject(Subject subject);
+    void create(Subject subject);
 
-    Set<Subject> getAllSubject();
+    Set<Subject> getAll();
 
-    Subject findSubjectById(Integer id);
+    Subject findById(Integer id);
 
-    void deleteSubject(Integer id);
+    void delete(Integer id);
 
-    void deleteAllSubject();
+    void deleteAll();
 
-    void updateSubject(SubjectDto subjectDto, Integer id);
+    void update(SubjectDto subjectDto, Integer id);
 
 }

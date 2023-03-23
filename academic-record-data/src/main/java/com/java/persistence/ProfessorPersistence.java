@@ -7,16 +7,16 @@ import java.util.Collection;
 
 public interface ProfessorPersistence {
 
-    void createProfessor(Professor professor);
+    void create(Professor professor) throws ExceptionPersistence;
 
-    Collection<Professor> getAllProfessor();
+    Collection<Professor> getAll() throws ExceptionPersistence;
 
-    Professor findProfessorById(Integer id);
+    Professor findById(Integer id) throws ExceptionPersistence;
 
-    void deleteProfessor(Integer id);
+    void delete(Integer id) throws ExceptionPersistence;
 
-    void deleteAllProfessor();
+    void deleteAll() throws ExceptionPersistence;
 
-    void updateProfessor(ProfessorDto professorDto, Integer id);
+    void update(ProfessorDto professorDto, Integer id) throws ExceptionPersistence;
 
 }
