@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 
 
+import java.util.Collection;
 import java.util.Set;
 
 @RequestMapping("/professor/")
@@ -27,7 +28,7 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @GetMapping
-    public ResponseEntity<Set<Professor>> findAll() {
+    public ResponseEntity<Collection<Professor>> findAll() {
         try {
             return new ResponseEntity<>(professorService.findAll(), HttpStatus.ACCEPTED);
         } catch (Exception e){
@@ -45,7 +46,7 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody ProfessorDto professorDto){
+    public ResponseEntity<HttpStatus> save(@RequestBody ProfessorDto professorDto){
         try {
             professorService.save(professorDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -55,7 +56,7 @@ public class ProfessorController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable Integer id) {
         try {
             professorService.findById(id);
             professorService.deleteById(id);
@@ -65,13 +66,20 @@ public class ProfessorController {
         }
     }
 
-    @PatchMapping("{id}")
-
-
-    @PutMapping("{id}")
-    public ResponseEntity<String> update(@RequestBody Professor professor, @PathVariable Integer id){
+    @DeleteMapping
+    public ResponseEntity<HttpStatus> delete(){
         try {
-            professorService.update(professor, id);
+            professorService.delete();
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+
+    @PatchMapping("{id}")
+    public ResponseEntity<HttpStatus> update(@RequestBody ProfessorDto professorDto, @PathVariable Integer id){
+        try {
+            professorService.update(professorDto, id);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,6 +1,7 @@
 package com.java.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
+@Table(name = "subjects")
 public class Subject extends BaseEntity{
 
     private String subjectName;

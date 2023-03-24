@@ -16,8 +16,6 @@ import java.util.Set;
 @Service
 public class GradeServiceImpl implements GradeService {
 
-    @Autowired
-    private GradePersistence gradePersistence;
 
     @Override
     public Grade save(GradeDto gradeDto) throws ExceptionService{

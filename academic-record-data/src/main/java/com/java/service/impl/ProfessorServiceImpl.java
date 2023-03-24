@@ -7,6 +7,8 @@ import com.java.service.ExceptionService;
 import com.java.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
@@ -20,8 +22,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public Professor save(ProfessorDto professorDto) throws ExceptionService {
         try {
-            Integer id = UUID.randomUUID().hashCode();
-            Professor professor = new Professor(id, professorDto, new Date());
+            Professor professor = new Professor(professorDto, new Date());
             professorPersistence.create(professor);
             return professor;
         } catch (Exception e){
@@ -30,23 +31,27 @@ public class ProfessorServiceImpl implements ProfessorService {
     }
 
     @Override
-    public Set<Professor> findAll() throws ExceptionService {
+    public Collection<Professor> findAll() throws ExceptionService {
         try{
-            return (Set<Professor>) professorPersistence.getAll();
+            return professorPersistence.getAll();
         }catch (Exception e){
             throw new ExceptionService(e.getMessage());
         }
     }
 
     @Override
-    public Professor findById(Integer id) {
-        return null;
+    public Professor findById(Integer id) throws ExceptionService {
+        try{
+            return professorPersistence.findById(id);
+        } catch (Exception e){
+            throw new ExceptionService(e.getMessage());
+        }
     }
 
     @Override
     public void delete() throws ExceptionService {
         try {
-            professorPersistence.deleteAll();
+            professorPersistence.delete();
         } catch (Exception e){
             throw new ExceptionService(e.getMessage());
         }
@@ -55,14 +60,25 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public void deleteById(Integer id) throws ExceptionService {
         try {
-            professorPersistence.delete(id);
+            professorPersistence.deleteById(id);
         } catch (Exception e){
             throw new ExceptionService(e.getMessage());
         }
     }
 
     @Override
-    public void update(Professor professor, Integer id) {
-        //Not yet...
+    public void update(ProfessorDto professorDto, Integer id) throws ExceptionService {
+        try {
+            if (professorPersistence.findById(id) != null){
+                Professor professor = professorPersistence.findById(id);
+                professor.setFirstName(professorDto.getFirstName());
+                professor.setLastName(professorDto.getLastName());
+                professor.setEmail(professorDto.getEmail());
+                professor.setPassword(professorDto.getPassword());
+                professorPersistence.update(professor,id);
+            }
+        } catch (Exception e){
+            throw new ExceptionService(e.getMessage());
+        }
     }
 }

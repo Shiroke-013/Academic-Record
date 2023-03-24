@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.Optional;
 
+
 @Repository
 public class ProfessorPersistenceImpl implements ProfessorPersistence {
 
@@ -56,7 +57,7 @@ public class ProfessorPersistenceImpl implements ProfessorPersistence {
     }
 
     @Override
-    public void delete(Integer id) throws ExceptionPersistence {
+    public void deleteById(Integer id) throws ExceptionPersistence {
         try{
             professorRepository.deleteById(id);
         } catch (Exception e){
@@ -65,7 +66,7 @@ public class ProfessorPersistenceImpl implements ProfessorPersistence {
     }
 
     @Override
-    public void deleteAll() throws ExceptionPersistence {
+    public void delete() throws ExceptionPersistence {
         try{
             if (professorRepository.count()!=0){
                 professorRepository.deleteAll();
@@ -75,14 +76,12 @@ public class ProfessorPersistenceImpl implements ProfessorPersistence {
         }
     }
 
-    /**
-     * The method is null due to slow implementation...
-     * @param professorDto
-     * @param id
-     * @throws ExceptionPersistence
-     */
     @Override
-    public void update(ProfessorDto professorDto, Integer id) throws ExceptionPersistence {
-        //Does nothing due to slow implementation...
+    public void update(Professor professor, Integer id) throws ExceptionPersistence {
+        try {
+            professorRepository.save(professor);
+        } catch (Exception e){
+            throw new ExceptionPersistence("Could not update Professor");
+        }
     }
 }

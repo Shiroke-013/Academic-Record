@@ -13,10 +13,10 @@ public interface ProfessorPersistence {
 
     Professor findById(Integer id) throws ExceptionPersistence;
 
-    void delete(Integer id) throws ExceptionPersistence;
+    void deleteById(Integer id) throws ExceptionPersistence;
 
-    void deleteAll() throws ExceptionPersistence;
+    void delete() throws ExceptionPersistence;
 
-    void update(ProfessorDto professorDto, Integer id) throws ExceptionPersistence;
+    void update(Professor professor, Integer id) throws ExceptionPersistence;
 
 }

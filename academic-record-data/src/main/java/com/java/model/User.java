@@ -1,12 +1,12 @@
 package com.java.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@MappedSuperclass
 public class User extends BaseEntity{
 
     private String firstName;

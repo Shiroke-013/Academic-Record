@@ -1,9 +1,8 @@
 package com.java.service;
 
 import com.java.dto.ProfessorDto;
-import com.java.model.Professor;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface ProfessorService<T> {
 
@@ -11,12 +10,12 @@ public interface ProfessorService<T> {
 
     T findById(Integer id) throws ExceptionService;
 
-    Set<T> findAll() throws ExceptionService;
+    Collection<T> findAll() throws ExceptionService;
 
     void delete() throws ExceptionService;
 
     void deleteById(Integer id) throws ExceptionService;
 
-    void update(Professor professor, Integer id) throws ExceptionService;
+    void update(ProfessorDto professorDto, Integer id) throws ExceptionService;
 
 }

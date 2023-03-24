@@ -7,15 +7,15 @@ import java.util.Set;
 
 public interface GradePersistence {
 
-    void create(Grade grade);
+    void create(Grade grade) throws ExceptionPersistence;
 
-    Set<Grade> getAll();
+    Set<Grade> getAll() throws ExceptionPersistence;
 
-    Grade findById(Integer id);
+    Grade findById(Integer id) throws ExceptionPersistence;
 
-    void delete(Integer id);
+    void delete(Integer id) throws ExceptionPersistence;
 
-    void deleteAll();
+    void deleteAll() throws ExceptionPersistence;
 
-    void update(GradeDto gradeDto, Integer id);
+    void update(GradeDto gradeDto, Integer id) throws ExceptionPersistence;
 }
