@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
-import java.util.UUID;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
@@ -69,12 +67,20 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public void update(ProfessorDto professorDto, Integer id) throws ExceptionService {
         try {
-            if (professorPersistence.findById(id) != null){
-                Professor professor = professorPersistence.findById(id);
-                professor.setFirstName(professorDto.getFirstName());
-                professor.setLastName(professorDto.getLastName());
-                professor.setEmail(professorDto.getEmail());
+            Professor professor = findById(id);
+            if (professor != null){
+                if (professorDto.getFirstName() != null){
+                    professor.setFirstName(professorDto.getFirstName());
+                }
+                if (professorDto.getLastName() != null){
+                    professor.setLastName(professorDto.getLastName());
+                }
+                if (professorDto.getEmail() != null){
+                    professor.setEmail(professorDto.getEmail());
+                }
+                if (professorDto.getPassword() != null){
                 professor.setPassword(professorDto.getPassword());
+                }
                 professorPersistence.update(professor,id);
             }
         } catch (Exception e){
