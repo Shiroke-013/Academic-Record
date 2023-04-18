@@ -84,7 +84,7 @@ public class ProfessorController {
     public ResponseEntity<Object> update(@RequestBody ProfessorDto professorDto, @PathVariable Integer id){
         try {
             professorService.update(professorDto, id);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             String errorMessage = ERROR_OCCURRED + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);

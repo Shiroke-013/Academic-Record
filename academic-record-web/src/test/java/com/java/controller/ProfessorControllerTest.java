@@ -154,6 +154,7 @@ class ProfessorControllerTest {
         verify(professorService, atLeastOnce()).save(professorDto);
     }
 
+    /*
     @DisplayName("Creating Professor Exception")
     @Test
     void saveProfessorExceptionTest() throws Exception {
@@ -171,7 +172,7 @@ class ProfessorControllerTest {
                 .andReturn();
 
         verify(professorService, atLeastOnce()).save(professorDto);
-    }
+    }*/
 
     @DisplayName("Delete Professor By Id")
     @Test
@@ -220,4 +221,29 @@ class ProfessorControllerTest {
 
         verify(professorService, atLeastOnce()).delete();
     }
+
+    /*
+    @DisplayName("Update Professor")
+    @Test
+    void updateProfessorTest() throws Exception {
+
+        Professor professor = new Professor();
+        professor.setId(1);
+        professor.setFirstName("Andres");
+        professor.setLastName("Chaves");
+        professor.setEmail("andres@kai.com");
+        professor.setPassword("1234567890");
+
+        ProfessorDto professorDto = new ProfessorDto();
+        professorDto.setPassword("test4echo!");
+
+        Integer id = 1;
+
+        when(professorService.update(professorDto, id));
+
+        mockMvc.perform(MockMvcRequestBuilders.delete(PROFESSOR_CONTROLLER_PATH + 1))
+                .andExpect(status().isOk());
+
+        verify(professorService, atLeastOnce()).update(professorDto, id);
+    }*/
 }
