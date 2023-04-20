@@ -1,7 +1,6 @@
-package com.java.controllers;
+package com.java.controller;
 
 import com.java.dto.ProfessorDto;
-import com.java.model.Professor;
 import com.java.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,71 +15,79 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 
 
-import java.util.Collection;
+import javax.validation.Valid;
 
 @RequestMapping("/professor/")
 @RestController
 public class ProfessorController {
 
+    private static final String ERROR_OCCURRED = "An error occurred: ";
+
     @Autowired
     private ProfessorService professorService;
 
     @GetMapping
-    public ResponseEntity<Collection<Professor>> findAll() {
+    public ResponseEntity<Object> findAll() {
         try {
-            return new ResponseEntity<>(professorService.findAll(), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(professorService.findAll(), HttpStatus.OK);
         } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id){
+    public ResponseEntity<Object> findById(@PathVariable Integer id){
         try {
-            return new ResponseEntity<>(professorService.findById(id), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(professorService.findById(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> save(@RequestBody ProfessorDto professorDto){
+    public ResponseEntity<Object> save(@Valid @RequestBody ProfessorDto professorDto){
         try {
             professorService.save(professorDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteById(@PathVariable Integer id) {
+    public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
         try {
             professorService.findById(id);
             professorService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping
-    public ResponseEntity<HttpStatus> delete(){
+    public ResponseEntity<Object> delete(){
         try {
             professorService.delete();
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody ProfessorDto professorDto, @PathVariable Integer id){
+    public ResponseEntity<Object> update(@RequestBody ProfessorDto professorDto, @PathVariable Integer id){
         try {
             professorService.update(professorDto, id);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -24,4 +24,12 @@ public class Professor extends User {
         this.setCreatedAt(createdAt);
     }
 
+    public Professor(String firstName, String lastname, String email, String password){
+        this.setFirstName(firstName);
+        this.setLastName(lastname);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setCreatedAt(new Date());
+    }
+
 }
