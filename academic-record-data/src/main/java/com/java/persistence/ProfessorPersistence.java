@@ -1,6 +1,5 @@
 package com.java.persistence;
 
-import com.java.dto.ProfessorDto;
 import com.java.model.Professor;
 
 import java.util.Collection;
