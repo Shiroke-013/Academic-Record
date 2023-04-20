@@ -1,26 +1,27 @@
 package com.java.model;
 
+import com.java.dto.ProfessorDto;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.Set;
+import java.util.Date;
 
-
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
+@Table(name = "professors")
 public class Professor extends User {
 
-    private Set<Subject> subjects;
-
-    public Professor(String name, String lastname, Set<Subject> subjects) {
-        this.setFirsName(name);
-        this.setLastName(lastname);
-        this.subjects = subjects;
+    public Professor(ProfessorDto professorDto, Date createdAt) {
+        this.setFirstName(professorDto.getFirstName());
+        this.setLastName(professorDto.getLastName());
+        this.setEmail(professorDto.getEmail());
+        this.setPassword(professorDto.getPassword());
+        this.setCreatedAt(createdAt);
     }
 
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
 }

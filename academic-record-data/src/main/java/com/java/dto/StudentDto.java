@@ -1,14 +1,16 @@
-package com.java.model;
+package com.java.dto;
 
-import jakarta.persistence.MappedSuperclass;
+import com.java.model.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-@MappedSuperclass
-public class User extends BaseEntity{
+public class StudentDto extends BaseEntity implements Serializable {
 
+    private Integer id;
     private String firstName;
     private String lastName;
     private String email;

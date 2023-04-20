@@ -1,18 +1,18 @@
-package com.java.model;
+package com.java.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.java.model.BaseEntity;
+import com.java.model.Professor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalTime;
 
+
 @Getter
 @Setter
-@Entity
-@Table(name = "subjects")
-public class Subject extends BaseEntity{
+public class SubjectDto extends BaseEntity implements Serializable {
 
     private String subjectName;
     private Time duration;
