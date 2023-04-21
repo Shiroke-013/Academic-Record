@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "subjects")
+@Table(name = "subject")
 public class Subject extends BaseEntity{
 
     private String subjectName;
@@ -19,6 +19,6 @@ public class Subject extends BaseEntity{
     private Integer capacity;
     private LocalTime startDate;
     private LocalTime endDate;
-    private Professor professor;
+    private Teacher teacher;
 
 }

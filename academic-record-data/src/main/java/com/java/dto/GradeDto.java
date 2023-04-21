@@ -6,12 +6,10 @@ import com.java.model.Subject;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 
 @Getter
 @Setter
-public class GradeDto extends BaseEntity implements Serializable {
+public class GradeDto extends BaseEntity {
 
     private Integer calification;
     private Student student;

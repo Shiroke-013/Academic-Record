@@ -1,12 +1,12 @@
 package com.java.service;
 
-import com.java.dto.ProfessorDto;
+import com.java.dto.TeacherDto;
 
 import java.util.Collection;
 
-public interface ProfessorService<T> {
+public interface TeacherService<T> {
 
-    T save(ProfessorDto professorDto) throws ExceptionService;
+    T save(TeacherDto teacherDto) throws ExceptionService;
 
     T findById(Integer id) throws ExceptionService;
 
@@ -16,6 +16,6 @@ public interface ProfessorService<T> {
 
     void deleteById(Integer id) throws ExceptionService;
 
-    void update(ProfessorDto professorDto, Integer id) throws ExceptionService;
+    void update(TeacherDto teacherDto, Integer id) throws ExceptionService;
 
 }
