@@ -1,7 +1,7 @@
 package com.java.controller;
 
-import com.java.dto.ProfessorDto;
-import com.java.service.ProfessorService;
+import com.java.dto.TeacherDto;
+import com.java.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.PatchMapping;
 
 import javax.validation.Valid;
 
-@RequestMapping("/professor/")
+@RequestMapping("/teacher/")
 @RestController
-public class ProfessorController {
+public class TeacherController {
 
-    private static final String ERROR_OCCURRED = "An error occurred: ";
+    private static final String ERROR_MESSAGE = "An error occurred: ";
 
     @Autowired
-    private ProfessorService professorService;
+    private TeacherService teacherService;
 
     @GetMapping
     public ResponseEntity<Object> findAll() {
         try {
-            return new ResponseEntity<>(professorService.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(teacherService.findAll(), HttpStatus.OK);
         } catch (Exception e){
-            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            String errorMessage = ERROR_MESSAGE + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -39,20 +39,20 @@ public class ProfessorController {
     @GetMapping("{id}")
     public ResponseEntity<Object> findById(@PathVariable Integer id){
         try {
-            return new ResponseEntity<>(professorService.findById(id), HttpStatus.OK);
+            return new ResponseEntity<>(teacherService.findById(id), HttpStatus.OK);
         } catch (Exception e) {
-            String errorMessage = ERROR_OCCURRED + e.getMessage();
-            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+            String errorMessage = ERROR_MESSAGE + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@Valid @RequestBody ProfessorDto professorDto){
+    public ResponseEntity<Object> save(@Valid @RequestBody TeacherDto teacherDto){
         try {
-            professorService.save(professorDto);
+            teacherService.save(teacherDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e){
-            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            String errorMessage = ERROR_MESSAGE + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -60,34 +60,34 @@ public class ProfessorController {
     @DeleteMapping("{id}")
     public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
         try {
-            professorService.findById(id);
-            professorService.deleteById(id);
+            teacherService.findById(id);
+            teacherService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
-            String errorMessage = ERROR_OCCURRED + e.getMessage();
-            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+            String errorMessage = ERROR_MESSAGE + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
     @DeleteMapping
     public ResponseEntity<Object> delete(){
         try {
-            professorService.delete();
+            teacherService.delete();
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e){
-            String errorMessage = ERROR_OCCURRED + e.getMessage();
+            String errorMessage = ERROR_MESSAGE + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<Object> update(@RequestBody ProfessorDto professorDto, @PathVariable Integer id){
+    public ResponseEntity<Object> update(@RequestBody TeacherDto teacherDto, @PathVariable Integer id){
         try {
-            professorService.update(professorDto, id);
+            teacherService.update(teacherDto, id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            String errorMessage = ERROR_OCCURRED + e.getMessage();
-            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+            String errorMessage = ERROR_MESSAGE + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 }

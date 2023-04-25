@@ -5,12 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
-
 
 @Getter
 @Setter
-public class ProfessorDto extends BaseEntity implements Serializable {
+public class TeacherDto extends BaseEntity {
 
     private Integer id;
 

@@ -13,7 +13,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 public class Student extends User {
 
     @OneToMany(mappedBy = "student")

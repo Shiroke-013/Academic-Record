@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Grades")
+@Table(name = "grade")
 public class Grade extends BaseEntity{
 
     private Integer calification;

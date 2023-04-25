@@ -1,6 +1,6 @@
 package com.java.model;
 
-import com.java.dto.ProfessorDto;
+import com.java.dto.TeacherDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -13,18 +13,18 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "professors")
-public class Professor extends User {
+@Table(name = "teacher")
+public class Teacher extends User {
 
-    public Professor(ProfessorDto professorDto, Date createdAt) {
-        this.setFirstName(professorDto.getFirstName());
-        this.setLastName(professorDto.getLastName());
-        this.setEmail(professorDto.getEmail());
-        this.setPassword(professorDto.getPassword());
+    public Teacher(TeacherDto teacherDto, Date createdAt) {
+        this.setFirstName(teacherDto.getFirstName());
+        this.setLastName(teacherDto.getLastName());
+        this.setEmail(teacherDto.getEmail());
+        this.setPassword(teacherDto.getPassword());
         this.setCreatedAt(createdAt);
     }
 
-    public Professor(String firstName, String lastname, String email, String password){
+    public Teacher(String firstName, String lastname, String email, String password){
         this.setFirstName(firstName);
         this.setLastName(lastname);
         this.setEmail(email);
