@@ -1,21 +1,26 @@
 package com.java.persistence;
 
-import com.java.dto.StudentDto;
 import com.java.model.Student;
+import com.java.model.Subject;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface StudentPersistence {
 
-    void create(Student student);
+    void create(Student student) throws ExceptionPersistence;
 
-    Set<Student> getAll();
+    Collection<Student> getAll() throws ExceptionPersistence;
 
-    Student findById(Integer id);
+    Student findById(Integer id) throws ExceptionPersistence;
 
-    void delete(Integer id);
+    void delete(Integer id) throws ExceptionPersistence;
 
-    void deleteAll();
+    void deleteAll() throws ExceptionPersistence;
 
-    void update(StudentDto studentDto, Integer id);
+    void update(Student student) throws ExceptionPersistence;
+
+    Student findByLastName(String lastName);
+
+    Collection<Subject> findAllSubjects(Integer id );
+
 }
