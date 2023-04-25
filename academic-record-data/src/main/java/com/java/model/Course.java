@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "Courses")
+@Table(name = "course")
 public class Course extends BaseEntity{
 
     private String courseName;
