@@ -3,15 +3,9 @@ package com.java.model;
 import com.java.dto.TeacherDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "teacher")
 public class Teacher extends User {
@@ -30,6 +24,10 @@ public class Teacher extends User {
         this.setEmail(email);
         this.setPassword(password);
         this.setCreatedAt(new Date());
+    }
+
+    public Teacher() {
+
     }
 
 }

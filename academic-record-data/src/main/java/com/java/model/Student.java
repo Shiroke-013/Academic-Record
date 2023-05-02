@@ -1,17 +1,11 @@
 package com.java.model;
 
 import com.java.dto.StudentDto;
-import com.sun.tools.javac.util.List;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.Date;
+import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
+
 @Entity
 @Table(name = "student")
 public class Student extends User {
@@ -27,20 +21,35 @@ public class Student extends User {
                 { @JoinColumn(name = "course_id", referencedColumnName = "id") })
     private Course course;
 
-    public Student(String firstName, String lastname, String email, String password){
-        this.setFirstName(firstName);
-        this.setLastName(lastname);
-        this.setEmail(email);
-        this.setPassword(password);
-        this.setCreatedAt(new Date());
+    public Student (String firstName, String lastName, String email, String password){
+        super();
     }
 
     public Student(StudentDto studentDto){
-        this.setFirstName(studentDto.getFirstName());
-        this.setLastName(studentDto.getLastName());
-        this.setEmail(studentDto.getEmail());
-        this.setPassword(studentDto.getPassword());
-        this.setCreatedAt(new Date());
+        super.setId(studentDto.getId());
+        super.setFirstName(studentDto.getFirstName());
+        super.setLastName(studentDto.getLastName());
+        super.setEmail(studentDto.getEmail());
+        super.setPassword(studentDto.getPassword());
     }
 
+    public Student() {
+
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }

@@ -1,7 +1,6 @@
 package com.java.service.impl;
 
 import com.java.dto.StudentDto;
-import com.java.mappers.StudentMapper;
 import com.java.model.Student;
 import com.java.persistence.StudentPersistence;
 import com.java.service.ExceptionService;
@@ -14,19 +13,14 @@ import java.util.Collection;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private final StudentMapper studentMapper;
-
     @Autowired
     private StudentPersistence studentPersistence;
 
-    public StudentServiceImpl(StudentMapper studentMapper) {
-        this.studentMapper = studentMapper;
-    }
 
     @Override
     public void save(StudentDto studentDto) throws ExceptionService {
         try {
-            Student student = studentMapper.toModel(studentDto);
+            Student student = new Student();
             studentPersistence.create(student);
         } catch (Exception e) {
             throw new ExceptionService("Could not create the student");
