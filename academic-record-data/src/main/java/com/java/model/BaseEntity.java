@@ -18,6 +18,10 @@ public class BaseEntity implements Serializable {
     private Integer id;
     private Date createdAt;
 
+    public BaseEntity() {
+        this.createdAt = new Date();
+    }
+
     public Integer getId() {
         return id;
     }

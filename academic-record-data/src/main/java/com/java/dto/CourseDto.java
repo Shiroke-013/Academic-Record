@@ -1,6 +1,9 @@
 package com.java.dto;
 
+import com.java.model.Student;
+
 import java.time.LocalDate;
+import java.util.Set;
 
 
 public class CourseDto {
@@ -9,6 +12,7 @@ public class CourseDto {
     private Integer numberOfStudents;
     private LocalDate courseStart;
     private LocalDate courseEnd;
+    private Set<Student> students;
 
     public String getCourseName() {
         return courseName;
@@ -40,5 +44,13 @@ public class CourseDto {
 
     public void setCourseEnd(LocalDate courseEnd) {
         this.courseEnd = courseEnd;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

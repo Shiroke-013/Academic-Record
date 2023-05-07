@@ -18,7 +18,6 @@
 
     <modules>
         <module>academic-record-data</module>
-		<module>academic-record-web</module>
 	</modules>
 
     <properties>

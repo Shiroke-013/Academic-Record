@@ -1,12 +1,14 @@
 package com.java.model;
 
-
-
-import org.jetbrains.annotations.NotNull;
+import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 
-
+@Getter
+@Setter
+@MappedSuperclass
 public class User extends BaseEntity {
 
     @NotEmpty(message = "First name is required")
@@ -20,6 +22,16 @@ public class User extends BaseEntity {
 
     @NotEmpty(message = "Password name is required")
     private String password;
+
+    public User(String firstName, String lastName, String email, String password) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(){ }
 
     public String getFirstName() {
         return firstName;
