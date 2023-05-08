@@ -1,4 +1,20 @@
 package com.java.service;
 
-public interface CourseService {
+import com.java.dto.CourseDto;
+
+import java.util.Collection;
+
+public interface CourseService<T> {
+
+    void save(CourseDto teacherDto) throws Exception;
+
+    T findById(Integer id) throws ExceptionService;
+
+    Collection<T> findAll() throws ExceptionService;
+
+    void deleteAll() throws ExceptionService;
+
+    void deleteById(Integer id) throws ExceptionService;
+
+    void update(CourseDto courseDto, Integer id) throws ExceptionService;
 }

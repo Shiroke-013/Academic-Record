@@ -1,21 +1,20 @@
 package com.java.persistence;
 
-import com.java.dto.CourseDto;
 import com.java.model.Course;
 
 import java.util.Set;
 
 public interface CoursePersistence {
 
-    void create(Course course);
+    void create(Course course) throws Exception;
 
-    Set<Course> getAll();
+    Set<Course> findAll() throws ExceptionPersistence;
 
-    Course findById(Integer id);
+    Course findById(Integer id) throws ExceptionPersistence;
 
-    void delete(Integer id);
+    void delete(Integer id) throws ExceptionPersistence;
 
-    void deleteAll();
+    void deleteAll() throws ExceptionPersistence;
 
-    void update(CourseDto courseDto, Integer id);
+    void update(Course course) throws ExceptionPersistence;
 }

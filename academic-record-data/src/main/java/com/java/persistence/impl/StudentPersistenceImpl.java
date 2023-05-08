@@ -61,7 +61,6 @@ public class StudentPersistenceImpl implements StudentPersistence {
         } catch (Exception e){
             throw new ExceptionPersistence("Failed to delete Student with id: " + id);
         }
-
     }
 
     @Override
