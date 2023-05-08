@@ -1,10 +1,16 @@
 package com.java.controller;
 
 import com.java.dto.CourseDto;
-import com.java.dto.StudentDto;
 import com.java.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -13,8 +19,8 @@ import java.util.Collection;
 @RestController
 public class CourseController {
 
-    @Autowired
-    CourseService courseService;
+    @Autowired(required = false)
+    private CourseService courseService;
 
     @PostMapping
     public void save(@Valid @RequestBody CourseDto courseDto) throws Exception {

@@ -13,7 +13,7 @@ import java.util.Collection;
 public class CourseServiceImpl implements CourseService {
 
     @Autowired
-    CoursePersistence coursePersistence;
+    private CoursePersistence coursePersistence;
 
     @Override
     public void save(CourseDto courseDto) throws Exception {
