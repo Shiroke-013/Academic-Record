@@ -93,13 +93,13 @@ public class StudentServiceImpl implements StudentService {
         try {
             studentPersistence.deleteAll();
         } catch (Exception e){
-            throw new ExceptionService("Could delete all students");
+            throw new ExceptionService("Could not delete all students");
         }
     }
 
     @Override
     public void update(StudentDto studentDto, Integer id) throws ExceptionService {
-
+        //Not yet implemented
     }
 
     @Override
@@ -114,11 +114,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void registerIntoCourse(String course) throws ExceptionService {
-
+        //Not yet implemented
     }
 
     @Override
     public void registerIntoSubject() throws ExceptionService {
-
+        //Not yet implemented
     }
 }

@@ -1,7 +1,7 @@
 package com.java.controller;
 
-import com.java.dto.StudentDto;
-import com.java.service.StudentService;
+import com.java.dto.CourseDto;
+import com.java.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Collection;
 
-@RequestMapping("/student/")
+@RequestMapping("/course/")
 @RestController
-public class StudentController {
+public class CourseController {
 
-    @Autowired
-    private StudentService studentService;
+    @Autowired(required = false)
+    private CourseService courseService;
 
     @PostMapping
-    public void save(@Valid @RequestBody StudentDto studentDto) throws Exception {
+    public void save(@Valid @RequestBody CourseDto courseDto) throws Exception {
         try {
-            studentService.save(studentDto);
+            courseService.save(courseDto);
         } catch (Exception e){
             throw new Exception(e);
         }
@@ -34,34 +34,25 @@ public class StudentController {
     @GetMapping("{id}")
     public Object findById(@PathVariable Integer id) throws Exception {
         try {
-            return studentService.findById(id);
+            return courseService.findById(id);
         } catch (Exception e){
             throw new Exception(e);
         }
     }
 
     @GetMapping
-    public Collection<StudentDto> findAll() throws Exception {
+    public Collection<CourseDto> findAll() throws Exception {
         try {
-            return studentService.findAll();
+            return courseService.findAll();
         } catch (Exception e) {
             throw new Exception(e);
-        }
-    }
-
-    @GetMapping("subjects/{id}")
-    public Object findAllSubjects(@PathVariable Integer id) {
-        try {
-            return studentService.findAllSubjects(id);
-        } catch (Exception e){
-            return new Exception(e);
         }
     }
 
     @DeleteMapping("{id}")
     void delete(@PathVariable Integer id) throws Exception {
         try {
-            studentService.deleteById(id);
+            courseService.deleteById(id);
         } catch (Exception e){
             throw new Exception(e);
         }
@@ -70,28 +61,18 @@ public class StudentController {
     @DeleteMapping
     void deleteAll() throws Exception {
         try {
-            studentService.deleteAll();
+            courseService.deleteAll();
         } catch (Exception e) {
             throw new Exception(e);
         }
     }
 
     @PatchMapping("{id}")
-    void update(@Valid @RequestBody StudentDto studentDto, @PathVariable Integer id) throws Exception {
+    void update(@Valid @RequestBody CourseDto courseDto, @PathVariable Integer id) throws Exception {
         try {
-            studentService.update(studentDto, id);
+            courseService.update(courseDto, id);
         } catch (Exception e) {
             throw new Exception(e);
         }
     }
-
-    @PostMapping("register/{course}")
-    void registerIntoCourse(@PathVariable String course) throws Exception {
-        try {
-            studentService.registerIntoCourse(course);
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
-
 }
