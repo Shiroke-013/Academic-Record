@@ -1,12 +1,14 @@
 package com.java.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 
-
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -20,7 +22,13 @@ public class Course extends BaseEntity{
     private LocalDate courseEnd;
 
     @ManyToMany(mappedBy = "courses")
-    private Set<Student> students;
+    private Set<Student> students = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "course_subject",
+                joinColumns = @JoinColumn(name = "course_id"),
+                inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private Set<Subject> subjects = new HashSet<>();
 
     public String getCourseName() {
         return courseName;

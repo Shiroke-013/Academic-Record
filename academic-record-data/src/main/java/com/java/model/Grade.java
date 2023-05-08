@@ -1,6 +1,8 @@
 package com.java.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -8,16 +10,22 @@ import jakarta.persistence.Table;
 @Table(name = "grade")
 public class Grade extends BaseEntity{
 
-    private Integer calification;
+    private Double mark;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
     private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    public Integer getCalification() {
-        return calification;
+    public Double getMark() {
+        return mark;
     }
 
-    public void setCalification(Integer calification) {
-        this.calification = calification;
+    public void setMark(Double mark) {
+        this.mark = mark;
     }
 
     public Student getStudent() {
