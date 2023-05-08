@@ -1,6 +1,7 @@
 package com.java.service.impl;
 
 import com.java.dto.TeacherDto;
+import com.java.mappers.TeacherMapper;
 import com.java.model.Teacher;
 import com.java.persistence.TeacherPersistence;
 import com.java.service.ExceptionService;
@@ -20,7 +21,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher save(TeacherDto teacherDto) throws ExceptionService {
         try {
-            Teacher teacher = new Teacher(teacherDto, new Date());
+            Teacher teacher = TeacherMapper.INSTANCE.dtoToTeacher(teacherDto);
             teacherPersistence.create(teacher);
             return teacher;
         } catch (Exception e){
@@ -31,7 +32,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Collection<Teacher> findAll() throws ExceptionService {
         try{
-            return teacherPersistence.getAll();
+            return teacherPersistence.findAll();
         }catch (Exception e){
             throw new ExceptionService(e.getMessage());
         }
@@ -81,7 +82,7 @@ public class TeacherServiceImpl implements TeacherService {
                 if (teacherDto.getPassword() != null){
                 teacher.setPassword(teacherDto.getPassword());
                 }
-                teacherPersistence.update(teacher,id);
+                teacherPersistence.update(teacher);
             }
         } catch (Exception e){
             throw new ExceptionService(e.getMessage());

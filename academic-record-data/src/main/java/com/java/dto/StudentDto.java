@@ -19,6 +19,16 @@ public class StudentDto {
     @NotNull
     private String password;
 
+    public StudentDto(Integer id, @NotNull String firstName, @NotNull String lastName, @NotNull String email, @NotNull String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public StudentDto() {    }
+
     public Integer getId() {
         return id;
     }

@@ -110,7 +110,7 @@ class TeacherServiceTest {
         teachers.add(teacher1);
         teachers.add(teacher2);
 
-        when(teacherPersistence.getAll()).thenReturn(teachers);
+        when(teacherPersistence.findAll()).thenReturn(teachers);
 
         Collection<Teacher> result = teacherServiceImpl.findAll();
         assertEquals(teachers, result);

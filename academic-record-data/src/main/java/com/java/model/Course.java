@@ -1,12 +1,13 @@
 package com.java.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 
 
 import java.time.LocalDate;
-
+import java.util.Set;
 
 
 @Entity
@@ -17,6 +18,9 @@ public class Course extends BaseEntity{
     private Integer numberOfStudents;
     private LocalDate courseStart;
     private LocalDate courseEnd;
+
+    @ManyToMany(mappedBy = "courses")
+    private Set<Student> students;
 
     public String getCourseName() {
         return courseName;
@@ -48,5 +52,13 @@ public class Course extends BaseEntity{
 
     public void setCourseEnd(LocalDate courseEnd) {
         this.courseEnd = courseEnd;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

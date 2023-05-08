@@ -1,14 +1,18 @@
 package com.java.service.impl;
 
 import com.java.dto.StudentDto;
+import com.java.mappers.StudentMapper;
 import com.java.model.Student;
+import com.java.model.Subject;
 import com.java.persistence.StudentPersistence;
 import com.java.service.ExceptionService;
 import com.java.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -20,7 +24,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void save(StudentDto studentDto) throws ExceptionService {
         try {
-            Student student = new Student();
+            Student student = StudentMapper.INSTANCE.dtoToStudent(studentDto);
             studentPersistence.create(student);
         } catch (Exception e) {
             throw new ExceptionService("Could not create the student");
@@ -30,23 +34,44 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Object findById(Integer id) throws ExceptionService {
         try {
-            return studentPersistence.findById(id);
+            Student student = studentPersistence.findById(id);
+            return student;
         } catch (Exception e){
             throw new ExceptionService("Could not find the student");
         }
     }
 
-    @Override
-    public Object findByLastName(String lastname) throws ExceptionService {
+    /*@Override
+    public Object findByLastName(String lastName) throws ExceptionService {
         try {
-            return studentPersistence.findByLastName(lastname);
+            return studentPersistence.findByLastName(lastName);
         } catch (Exception e) {
             throw new ExceptionService("Could not find the student");
+        }
+    }*/
+
+    @Override
+    public Collection<StudentDto> findAll() throws ExceptionService {
+        try {
+            Collection<Student> allStudents = studentPersistence.findAll();
+            List<StudentDto> filterStudents = new ArrayList<>();
+            for (Student student : allStudents){
+
+                StudentDto studentDto = new StudentDto(student.getId(), student.getFirstName(), student.getLastName(),
+                        student.getEmail(), student.getPassword());
+
+                filterStudents.add(studentDto);
+            }
+
+            return filterStudents;
+
+        } catch (Exception e){
+            throw new ExceptionService(e.getMessage());
         }
     }
 
     @Override
-    public Collection findAll(Integer id) throws ExceptionService {
+    public Collection<Subject> findAllSubjects(Integer id) throws ExceptionService {
         try {
             return studentPersistence.findAllSubjects(id);
         } catch (Exception e){
@@ -59,7 +84,16 @@ public class StudentServiceImpl implements StudentService {
         try {
             studentPersistence.delete(id);
         } catch (Exception e){
-            throw new ExceptionService("Could not find the student subjects");
+            throw new ExceptionService("Could not delete student with id: " + id);
+        }
+    }
+
+    @Override
+    public void deleteAll() throws ExceptionService {
+        try {
+            studentPersistence.deleteAll();
+        } catch (Exception e){
+            throw new ExceptionService("Could delete all students");
         }
     }
 
@@ -79,7 +113,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void registerIntoCourse() throws ExceptionService {
+    public void registerIntoCourse(String course) throws ExceptionService {
 
     }
 

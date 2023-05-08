@@ -1,9 +1,9 @@
 package com.java.model;
 
-import com.java.dto.StudentDto;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -13,29 +13,19 @@ public class Student extends User {
     @OneToMany(mappedBy = "student")
     private List<Grade> grades;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "stu_course",
-        joinColumns =
-                { @JoinColumn(name = "student_id", referencedColumnName = "id") },
-        inverseJoinColumns =
-                { @JoinColumn(name = "course_id", referencedColumnName = "id") })
-    private Course course;
+    @ManyToMany
+    @JoinTable(name = "student_course",
+                joinColumns = @JoinColumn(name = "id"),
+                inverseJoinColumns = @JoinColumn(name = "id"))
+    private Set<Course> courses;
 
-    public Student (String firstName, String lastName, String email, String password){
-        super();
+    public Student(String firstName, String lastName, String email, String password, List<Grade> grades, Set<Course> course) {
+        super(firstName, lastName, email, password);
+        this.grades = grades;
+        this.courses = course;
     }
 
-    public Student(StudentDto studentDto){
-        super.setId(studentDto.getId());
-        super.setFirstName(studentDto.getFirstName());
-        super.setLastName(studentDto.getLastName());
-        super.setEmail(studentDto.getEmail());
-        super.setPassword(studentDto.getPassword());
-    }
-
-    public Student() {
-
-    }
+    public Student(){ }
 
     public List<Grade> getGrades() {
         return grades;
@@ -45,11 +35,11 @@ public class Student extends User {
         this.grades = grades;
     }
 
-    public Course getCourse() {
-        return course;
+    public Set<Course> getCourse() {
+        return courses;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Set<Course> course) {
+        this.courses = course;
     }
 }

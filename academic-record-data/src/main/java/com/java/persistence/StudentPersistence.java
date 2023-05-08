@@ -9,9 +9,9 @@ public interface StudentPersistence {
 
     void create(Student student) throws ExceptionPersistence;
 
-    Collection<Student> getAll() throws ExceptionPersistence;
-
     Student findById(Integer id) throws ExceptionPersistence;
+
+    Collection<Student> findAll() throws ExceptionPersistence;
 
     void delete(Integer id) throws ExceptionPersistence;
 
@@ -19,7 +19,7 @@ public interface StudentPersistence {
 
     void update(Student student) throws ExceptionPersistence;
 
-    Student findByLastName(String lastName);
+    //Student findByLastName(String lastName) throws ExceptionPersistence;
 
     Collection<Subject> findAllSubjects(Integer id );
 

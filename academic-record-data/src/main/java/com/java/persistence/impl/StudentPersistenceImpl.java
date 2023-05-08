@@ -1,6 +1,5 @@
 package com.java.persistence.impl;
 
-import com.java.dto.StudentDto;
 import com.java.model.Student;
 import com.java.model.Subject;
 import com.java.persistence.ExceptionPersistence;
@@ -33,15 +32,6 @@ public class StudentPersistenceImpl implements StudentPersistence {
     }
 
     @Override
-    public Collection<Student> getAll() throws ExceptionPersistence {
-        try {
-            return studentRepository.findAll();
-        } catch (Exception e){
-            throw new ExceptionPersistence("Failed to get all students");
-        }
-    }
-
-    @Override
     public Student findById(Integer id) throws ExceptionPersistence {
         try {
             Optional<Student> student = studentRepository.findById(id);
@@ -52,6 +42,15 @@ public class StudentPersistenceImpl implements StudentPersistence {
             throw new ExceptionPersistence("Failed to find student with id: " + id);
         }
         return new Student();
+    }
+
+    @Override
+    public Collection<Student> findAll() throws ExceptionPersistence {
+        try {
+            return studentRepository.findAll();
+        } catch (Exception e) {
+            throw new ExceptionPersistence("Failed to get all students");
+        }
     }
 
     @Override
@@ -81,11 +80,6 @@ public class StudentPersistenceImpl implements StudentPersistence {
         } catch (Exception e){
             throw new ExceptionPersistence("Failed to update student with id: " + student.getId());
         }
-    }
-
-    @Override
-    public Student findByLastName(String lastName) {
-        return null;
     }
 
     @Override

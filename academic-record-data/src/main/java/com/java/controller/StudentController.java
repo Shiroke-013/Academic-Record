@@ -2,18 +2,17 @@ package com.java.controller;
 
 
 import com.java.dto.StudentDto;
-import com.java.model.Student;
 import com.java.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 @RequestMapping("/student/")
 @RestController
 public class StudentController {
-
-    private static final String ERROR_OCCURRED = "An error occurred: ";
 
     @Autowired
     private StudentService studentService;
@@ -36,12 +35,21 @@ public class StudentController {
         }
     }
 
-    @GetMapping("{lastName}")
-    public Object findByLastName(@PathVariable String lastName) throws Exception {
+    @GetMapping
+    public Collection<StudentDto> findAll() throws Exception {
         try {
-            return studentService.findByLastName(lastName);
+            return studentService.findAll();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @GetMapping("subjects/{id}")
+    public Object findAllSubjects(@PathVariable Integer id) {
+        try {
+            return studentService.findAllSubjects(id);
         } catch (Exception e){
-            throw  new Exception(e);
+            return new Exception(e);
         }
     }
 
@@ -54,10 +62,28 @@ public class StudentController {
         }
     }
 
+    @DeleteMapping
+    void deleteAll() throws Exception {
+        try {
+            studentService.deleteAll();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
     @PatchMapping("{id}")
     void update(@Valid @RequestBody StudentDto studentDto, @PathVariable Integer id) throws Exception {
         try {
             studentService.update(studentDto, id);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @PostMapping("register/{course}")
+    void registerIntoCourse(@PathVariable String course) throws Exception {
+        try {
+            studentService.registerIntoCourse(course);
         } catch (Exception e) {
             throw new Exception(e);
         }
