@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface CoursePersistence {
 
-    void create(Course course) throws Exception;
+    void create(Course course) throws ExceptionPersistence;
 
     Set<Course> findAll() throws ExceptionPersistence;
 
