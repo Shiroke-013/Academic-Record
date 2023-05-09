@@ -1,7 +1,7 @@
 package com.java.controller;
 
-import com.java.dto.CourseDto;
-import com.java.service.CourseService;
+import com.java.dto.SubjectDto;
+import com.java.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Collection;
 
-@RequestMapping("/course/")
+@RequestMapping("/subject/")
 @RestController
-public class CourseController {
+public class SubjectController {
 
     @Autowired
-    private CourseService courseService;
+    private SubjectService subjectService;
 
     @PostMapping
-    public void save(@Valid @RequestBody CourseDto subjectDto) throws Exception {
+    public void save(@Valid @RequestBody SubjectDto subjectDto) throws Exception {
         try {
-            courseService.save(subjectDto);
+            subjectService.save(subjectDto);
         } catch (Exception e){
             throw new Exception(e);
         }
@@ -34,16 +34,16 @@ public class CourseController {
     @GetMapping("{id}")
     public Object findById(@PathVariable Integer id) throws Exception {
         try {
-            return courseService.findById(id);
+            return subjectService.findById(id);
         } catch (Exception e){
             throw new Exception(e);
         }
     }
 
     @GetMapping
-    public Collection<CourseDto> findAll() throws Exception {
+    public Collection<SubjectDto> findAll() throws Exception {
         try {
-            return courseService.findAll();
+            return subjectService.findAll();
         } catch (Exception e) {
             throw new Exception(e);
         }
@@ -52,7 +52,7 @@ public class CourseController {
     @DeleteMapping("{id}")
     void delete(@PathVariable Integer id) throws Exception {
         try {
-            courseService.deleteById(id);
+            subjectService.deleteById(id);
         } catch (Exception e){
             throw new Exception(e);
         }
@@ -61,16 +61,16 @@ public class CourseController {
     @DeleteMapping
     void deleteAll() throws Exception {
         try {
-            courseService.deleteAll();
+            subjectService.deleteAll();
         } catch (Exception e) {
             throw new Exception(e);
         }
     }
 
     @PatchMapping("{id}")
-    void update(@Valid @RequestBody CourseDto subjectDto, @PathVariable Integer id) throws Exception {
+    void update(@Valid @RequestBody SubjectDto subjectDto, @PathVariable Integer id) throws Exception {
         try {
-            courseService.update(subjectDto, id);
+            subjectService.update(subjectDto, id);
         } catch (Exception e) {
             throw new Exception(e);
         }

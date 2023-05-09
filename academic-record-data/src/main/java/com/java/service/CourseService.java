@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface CourseService<T> {
 
-    void save(CourseDto teacherDto) throws Exception;
+    void save(CourseDto teacherDto) throws ExceptionService;
 
     T findById(Integer id) throws ExceptionService;
 
