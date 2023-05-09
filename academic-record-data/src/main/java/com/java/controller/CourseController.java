@@ -19,7 +19,7 @@ import java.util.Collection;
 @RestController
 public class CourseController {
 
-    @Autowired(required = false)
+    @Autowired
     private CourseService courseService;
 
     @PostMapping

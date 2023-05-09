@@ -7,10 +7,14 @@ import com.java.persistence.repository.CourseRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Repository
 public class CoursePersistenceImpl implements CoursePersistence {
 
     @Autowired
@@ -31,7 +35,8 @@ public class CoursePersistenceImpl implements CoursePersistence {
     @Override
     public Set<Course> findAll() throws ExceptionPersistence {
         try {
-            return (Set<Course>) courseRepository.findAll();
+            List<Course> list = courseRepository.findAll();
+            return new HashSet<>(list);
         } catch (Exception e) {
             throw new ExceptionPersistence(e.getMessage());
         }

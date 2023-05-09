@@ -7,9 +7,11 @@ import com.java.persistence.CoursePersistence;
 import com.java.service.CourseService;
 import com.java.service.ExceptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+@Service
 public class CourseServiceImpl implements CourseService {
 
     @Autowired
