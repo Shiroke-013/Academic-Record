@@ -18,10 +18,13 @@ public class CourseServiceImpl implements CourseService {
     private CoursePersistence coursePersistence;
 
     @Override
-    public void save(CourseDto courseDto) throws Exception {
-
-        Course course = CourseMapper.INSTANCE.dtoToCourse(courseDto);
-        coursePersistence.create(course);
+    public void save(CourseDto courseDto) throws ExceptionService {
+        try {
+            Course course = CourseMapper.INSTANCE.dtoToCourse(courseDto);
+            coursePersistence.create(course);
+        } catch (Exception e){
+            throw new ExceptionService(e.getMessage());
+        }
     }
 
     @Override
