@@ -9,7 +9,7 @@ public interface GradePersistence {
 
     void create(Grade grade) throws ExceptionPersistence;
 
-    Set<Grade> getAll() throws ExceptionPersistence;
+    Set<Grade> findAll() throws ExceptionPersistence;
 
     Grade findById(Integer id) throws ExceptionPersistence;
 

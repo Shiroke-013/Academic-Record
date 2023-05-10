@@ -8,9 +8,11 @@ import com.java.persistence.repository.SubjectRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
+@Repository
 public class SubjectPersistenceImpl implements SubjectPersistence {
 
     @Autowired
