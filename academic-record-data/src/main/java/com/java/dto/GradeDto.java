@@ -6,16 +6,16 @@ import com.java.model.Subject;
 
 public class GradeDto {
 
-    private Integer calification;
+    private Integer mark;
     private Student student;
     private Subject subject;
 
-    public Integer getCalification() {
-        return calification;
+    public Integer getMark() {
+        return mark;
     }
 
-    public void setCalification(Integer calification) {
-        this.calification = calification;
+    public void setMark(Integer mark) {
+        this.mark = mark;
     }
 
     public Student getStudent() {
