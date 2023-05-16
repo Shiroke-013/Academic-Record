@@ -1,41 +1,27 @@
 package com.java.dto;
 
-import org.jetbrains.annotations.NotNull;
+import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 
 public class StudentDto {
 
-    private Integer id;
-
-    @NotNull
+    @NotEmpty
     private String firstName;
 
-    @NotNull
+    @NotEmpty
     private String lastName;
 
-    @NotNull
+    @NotEmpty
     private String email;
 
-    @NotNull
+    @NotEmpty
     private String password;
 
-    public StudentDto(Integer id, @NotNull String firstName, @NotNull String lastName, @NotNull String email, @NotNull String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
+    private Set<String> allGrades;
+    private String courseName;
 
-    public StudentDto() {    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public StudentDto() {  /*empty constructor*/  }
 
     public String getFirstName() {
         return firstName;
@@ -67,5 +53,21 @@ public class StudentDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<String> getAllGrades() {
+        return allGrades;
+    }
+
+    public void setAllGrades(Set<String> allGrades) {
+        this.allGrades = allGrades;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 }

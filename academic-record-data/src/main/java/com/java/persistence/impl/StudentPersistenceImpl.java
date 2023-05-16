@@ -1,7 +1,6 @@
 package com.java.persistence.impl;
 
 import com.java.model.Student;
-import com.java.model.Subject;
 import com.java.persistence.ExceptionPersistence;
 import com.java.persistence.StudentPersistence;
 import com.java.persistence.repository.StudentRepository;
@@ -81,8 +80,4 @@ public class StudentPersistenceImpl implements StudentPersistence {
         }
     }
 
-    @Override
-    public Collection<Subject> findAllSubjects(Integer id) {
-        return null;
-    }
 }

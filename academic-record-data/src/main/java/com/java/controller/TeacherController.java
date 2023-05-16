@@ -1,5 +1,6 @@
 package com.java.controller;
 
+import com.java.dto.GradeDto;
 import com.java.dto.TeacherDto;
 import com.java.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,4 +91,33 @@ public class TeacherController {
             return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
+
+    @GetMapping("course/{id}")
+    public ResponseEntity<Object> findCourse(@PathVariable Integer id) {
+        try {
+            return new ResponseEntity<>(teacherService.findCourse(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("subjects/{id}")
+    public ResponseEntity<Object> findSubjects(@PathVariable Integer id) {
+        try {
+            return new ResponseEntity<>(teacherService.findSubjects(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/add/grade/{studentId}/{subjectId}")
+    public ResponseEntity<Object> addGrade(@RequestBody GradeDto gradeDto, @PathVariable Integer studentId, @PathVariable Integer subjectId) {
+        try {
+            teacherService.addGrade(gradeDto, studentId, subjectId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

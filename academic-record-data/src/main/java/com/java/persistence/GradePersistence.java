@@ -1,15 +1,14 @@
 package com.java.persistence;
 
-import com.java.dto.GradeDto;
 import com.java.model.Grade;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface GradePersistence {
 
     void create(Grade grade) throws ExceptionPersistence;
 
-    Set<Grade> findAll() throws ExceptionPersistence;
+    Collection<Grade> findAll() throws ExceptionPersistence;
 
     Grade findById(Integer id) throws ExceptionPersistence;
 
@@ -17,5 +16,5 @@ public interface GradePersistence {
 
     void deleteAll() throws ExceptionPersistence;
 
-    void update(GradeDto gradeDto, Integer id) throws ExceptionPersistence;
+    void update(Grade grade) throws ExceptionPersistence;
 }

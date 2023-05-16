@@ -2,19 +2,17 @@ package com.java.service.impl;
 
 
 import com.java.dto.GradeDto;
-import com.java.dto.SubjectDto;
 import com.java.mappers.GradeMapper;
-import com.java.mappers.SubjectMapper;
 import com.java.model.Grade;
-import com.java.model.Subject;
 import com.java.persistence.GradePersistence;
-import com.java.persistence.SubjectPersistence;
 import com.java.service.ExceptionService;
 import com.java.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -37,16 +35,23 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public Object findById(Integer id) throws ExceptionService {
         try {
-            return gradePersistence.findById(id);
+            Optional<Grade> grade = Optional.ofNullable(gradePersistence.findById(id));
+            return GradeMapper.INSTANCE.gradeToDto(grade.get());
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
         }
     }
 
     @Override
-    public Set<Grade> findAll() throws ExceptionService {
+    public Collection<GradeDto> findAll() throws ExceptionService {
         try {
-            return gradePersistence.findAll();
+            Collection<Grade> grades = gradePersistence.findAll();
+            Set<GradeDto> gradeDtos = new HashSet<>();
+
+            for (Grade grade : grades) {
+                gradeDtos.add(GradeMapper.INSTANCE.gradeToDto(grade));
+            }
+            return gradeDtos;
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
         }
@@ -72,6 +77,14 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public void update(GradeDto gradeDto, Integer id) throws ExceptionService {
-        //Not yet implemented
+        try {
+            Grade grade = gradePersistence.findById(id);
+            if (gradeDto.getMark() != null){
+                grade.setMark(gradeDto.getMark());
+            }
+            gradePersistence.create(grade);
+        } catch (Exception e) {
+            throw new ExceptionService("Could not update");
+        }
     }
 }

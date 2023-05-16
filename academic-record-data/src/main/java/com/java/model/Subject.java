@@ -8,8 +8,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
-import java.sql.Time;
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,10 +18,10 @@ import java.util.Set;
 public class Subject extends BaseEntity{
 
     private String subjectName;
-    private Time duration;
+    private Integer duration;
     private Integer capacity;
-    private LocalTime startDate;
-    private LocalTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     @ManyToMany(mappedBy = "subjects")
     private Set<Student> students = new HashSet<>();
@@ -45,11 +44,11 @@ public class Subject extends BaseEntity{
         this.subjectName = subjectName;
     }
 
-    public Time getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
@@ -61,19 +60,19 @@ public class Subject extends BaseEntity{
         this.capacity = capacity;
     }
 
-    public LocalTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

@@ -1,18 +1,26 @@
 package com.java.dto;
 
-import com.java.model.Student;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Set;
 
 
 public class CourseDto {
 
+    @NotEmpty(message = "Course name is required")
     private String courseName;
     private Integer numberOfStudents;
+    @NotEmpty(message = "Start date for course is required")
     private LocalDate courseStart;
+    @NotEmpty(message = "End date for course is required")
     private LocalDate courseEnd;
-    private Set<Student> students;
+
+    private Set<String> studentsNames;
+    private Set<String> subjectsNames;
+    private Set<String> teachersNames;
+
+    public CourseDto() { /*empty constructor*/ }
 
     public String getCourseName() {
         return courseName;
@@ -46,11 +54,27 @@ public class CourseDto {
         this.courseEnd = courseEnd;
     }
 
-    public Set<Student> getStudents() {
-        return students;
+    public Set<String> getStudentsNames() {
+        return studentsNames;
     }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public void setStudentsNames(Set<String> studentsNames) {
+        this.studentsNames = studentsNames;
+    }
+
+    public Set<String> getSubjectsNames() {
+        return subjectsNames;
+    }
+
+    public void setSubjectsNames(Set<String> subjectsNames) {
+        this.subjectsNames = subjectsNames;
+    }
+
+    public Set<String> getTeachersNames() {
+        return teachersNames;
+    }
+
+    public void setTeachersNames(Set<String> teachersNames) {
+        this.teachersNames = teachersNames;
     }
 }

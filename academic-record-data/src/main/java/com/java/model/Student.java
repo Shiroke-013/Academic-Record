@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -18,11 +19,9 @@ public class Student extends User {
     @OneToMany(mappedBy = "student")
     private Set<Grade> grades = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "enrollments",
-                joinColumns = @JoinColumn(name = "student_id"),
-                inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course> courses = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     @ManyToMany
     @JoinTable(name = "student_subject",
@@ -30,13 +29,7 @@ public class Student extends User {
                 inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private Set<Subject> subjects = new HashSet<>();
 
-    public Student(String firstName, String lastName, String email, String password, Set<Grade> grades, Set<Course> courses) {
-        super(firstName, lastName, email, password);
-        this.grades = grades;
-        this.courses = courses;
-    }
-
-    public Student(){ }
+    public Student(){ /* Empty constructor*/ }
 
     public Set<Grade> getGrades() {
         return grades;
@@ -46,12 +39,12 @@ public class Student extends User {
         this.grades = grades;
     }
 
-    public Set<Course> getCourses() {
-        return courses;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Set<Subject> getSubjects() {

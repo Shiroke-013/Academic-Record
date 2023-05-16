@@ -1,36 +1,39 @@
 package com.java.dto;
 
-import com.java.model.Student;
-import com.java.model.Subject;
+import javax.validation.constraints.NotEmpty;
 
 
 public class GradeDto {
 
-    private Integer mark;
-    private Student student;
-    private Subject subject;
+    @NotEmpty(message = "Mark is required")
+    private Double mark;
 
-    public Integer getMark() {
+    private Integer studentId;
+    private Integer subjectId;
+
+    public GradeDto() { /* Empty Constructor */}
+
+    public Double getMark() {
         return mark;
     }
 
-    public void setMark(Integer mark) {
+    public void setMark(Double mark) {
         this.mark = mark;
     }
 
-    public Student getStudent() {
-        return student;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public Integer getSubjectId() {
+        return subjectId;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 }

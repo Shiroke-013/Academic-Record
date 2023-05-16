@@ -18,4 +18,9 @@ public interface SubjectService<T> {
 
     void update(SubjectDto subjectDto, Integer id) throws ExceptionService;
 
+    void addTeacher(Integer subjectId, Integer teacherId) throws ExceptionService;
+
+    Collection<T> findStudents(Integer id) throws ExceptionService;
+
+    void deleteTeacherFromSubject(Integer subjectId, Integer teacherId) throws ExceptionService;
 }

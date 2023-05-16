@@ -1,6 +1,5 @@
 package com.java.persistence.impl;
 
-import com.java.dto.SubjectDto;
 import com.java.model.Subject;
 import com.java.persistence.ExceptionPersistence;
 import com.java.persistence.SubjectPersistence;
@@ -10,7 +9,8 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 public class SubjectPersistenceImpl implements SubjectPersistence {
@@ -24,31 +24,58 @@ public class SubjectPersistenceImpl implements SubjectPersistence {
 
     @Override
     public void create(Subject subject) throws ExceptionPersistence {
-
+        try {
+            subjectRepository.save(subject);
+        } catch (Exception e) {
+            throw new ExceptionPersistence("Failed to create Subject");
+        }
     }
 
     @Override
-    public Set<Subject> findAll() throws ExceptionPersistence {
-        return null;
+    public Collection<Subject> findAll() throws ExceptionPersistence {
+        try {
+            return subjectRepository.findAll();
+        } catch (Exception e) {
+            throw new ExceptionPersistence("There's no subjects");
+        }
     }
 
     @Override
     public Subject findById(Integer id) throws ExceptionPersistence {
-        return null;
+        Optional<Subject> subject = subjectRepository.findById(id);
+        if (subject.isPresent()) {
+            return subject.get();
+        } else {
+            throw new ExceptionPersistence("Could not find Teacher with id: " + id);
+        }
     }
 
     @Override
     public void delete(Integer id) throws ExceptionPersistence {
-
+        try {
+            subjectRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new ExceptionPersistence("Could not delete");
+        }
     }
 
     @Override
     public void deleteAll() throws ExceptionPersistence {
-
+        try {
+            if (subjectRepository.count() != 0) {
+                subjectRepository.deleteAll();
+            }
+        } catch (Exception e) {
+            throw new ExceptionPersistence("Could not delete");
+        }
     }
 
     @Override
-    public void update(SubjectDto subjectDto, Integer id) throws ExceptionPersistence {
-
+    public void update(Subject subject) throws ExceptionPersistence {
+        try {
+            subjectRepository.save(subject);
+        } catch (Exception e) {
+            throw new ExceptionPersistence("Could not update");
+        }
     }
 }

@@ -26,7 +26,7 @@ public class SubjectController {
     public void save(@Valid @RequestBody SubjectDto subjectDto) throws Exception {
         try {
             subjectService.save(subjectDto);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e);
         }
     }
@@ -35,7 +35,7 @@ public class SubjectController {
     public Object findById(@PathVariable Integer id) throws Exception {
         try {
             return subjectService.findById(id);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e);
         }
     }
@@ -53,7 +53,7 @@ public class SubjectController {
     void delete(@PathVariable Integer id) throws Exception {
         try {
             subjectService.deleteById(id);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e);
         }
     }
@@ -75,4 +75,32 @@ public class SubjectController {
             throw new Exception(e);
         }
     }
+
+    @PatchMapping("{subjectId}/add/teacher/{teacherId}")
+    void addTeacher(@PathVariable Integer subjectId, @PathVariable Integer teacherId) throws Exception {
+        try {
+            subjectService.addTeacher(subjectId, teacherId);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @GetMapping("{id}/students")
+    Collection<String> findStudents(@PathVariable Integer id) throws Exception {
+        try {
+            return subjectService.findStudents(id);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @DeleteMapping("{subjectId}/teacher/{teacherId}")
+    void deleteTeacherFromSubject(@PathVariable Integer subjectId, @PathVariable Integer teacherId) throws Exception {
+        try {
+            subjectService.deleteTeacherFromSubject(subjectId, teacherId);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
 }
+

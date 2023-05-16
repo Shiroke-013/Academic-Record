@@ -75,4 +75,60 @@ public class CourseController {
             throw new Exception(e);
         }
     }
+
+    @GetMapping("{id}/teachers")
+    public Collection<String> findTeachers(@PathVariable Integer id) throws Exception {
+        try {
+            return courseService.findTeachers(id);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @GetMapping("{id}/students")
+    public Collection<String> findStudents(@PathVariable Integer id) throws Exception {
+        try {
+            return courseService.findStudents(id);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @GetMapping("{id}/subjects")
+    public Collection<String> findSubjects(@PathVariable Integer id) throws Exception {
+        try {
+            return courseService.findSubjects(id);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+
+
+    @DeleteMapping("{courseId}/teacher/{teacherId}")
+    void deleteTeacherFromCourse(@PathVariable Integer courseId, @PathVariable Integer teacherId) throws Exception {
+        try {
+            courseService.deleteTeacherFromCourse(courseId, teacherId);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @PatchMapping("{courseId}/add/teacher/{teacherId}")
+    void addTeacher(@PathVariable Integer courseId, @PathVariable Integer teacherId) throws Exception {
+        try {
+            courseService.addTeacher(courseId, teacherId);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @PatchMapping("{courseId}/add/subject/{subjectId}")
+    void addSubject(@PathVariable Integer courseId, @PathVariable Integer subjectId) throws Exception {
+        try {
+            courseService.addSubject(courseId, subjectId);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
 }

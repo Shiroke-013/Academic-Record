@@ -10,11 +10,7 @@ public interface StudentService<T> {
 
     T findById(Integer id) throws ExceptionService;
 
-    //T findByLastName(String lastname) throws ExceptionService;
-
     Collection<T> findAll() throws ExceptionService;
-
-    Collection<T> findAllSubjects(Integer id) throws ExceptionService;
 
     void deleteById(Integer id) throws ExceptionService;
 
@@ -26,8 +22,12 @@ public interface StudentService<T> {
 
     T howMuchToGetInFinalExam() throws ExceptionService;
 
-    void registerIntoCourse(String course) throws ExceptionService;
+    void registerIntoCourse(Integer studentId, Integer courseId) throws ExceptionService;
 
-    void registerIntoSubject() throws ExceptionService;
+    void registerIntoSubject(Integer studentId, Integer subjectId) throws ExceptionService;
+
+    T findCourse(Integer id) throws ExceptionService;
+
+    Collection<T> findAllSubjects(Integer id) throws ExceptionService;
 
 }
