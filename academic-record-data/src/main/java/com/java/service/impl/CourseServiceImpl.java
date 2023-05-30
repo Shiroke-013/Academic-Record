@@ -85,20 +85,26 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void update(CourseDto courseDto, Integer id) throws ExceptionService {
+    public boolean update(CourseDto courseDto, Integer id) throws ExceptionService {
         try {
             Course course = coursePersistence.findById(id);
-            if (courseDto.getCourseName() != null) {
-                course.setCourseName(courseDto.getCourseName());
-            }
-            if (courseDto.getNumberOfStudents() != null) {
-                course.setNumberOfStudents(courseDto.getNumberOfStudents());
-            }
-            if (courseDto.getCourseStart() != null) {
-                course.setCourseStart(courseDto.getCourseStart());
-            }
-            if (courseDto.getCourseEnd() != null) {
-                course.setCourseEnd(courseDto.getCourseEnd());
+            if (course != null) {
+                if (courseDto.getCourseName() != null) {
+                    course.setCourseName(courseDto.getCourseName());
+                }
+                if (courseDto.getNumberOfStudents() != null) {
+                    course.setNumberOfStudents(courseDto.getNumberOfStudents());
+                }
+                if (courseDto.getCourseStart() != null) {
+                    course.setCourseStart(courseDto.getCourseStart());
+                }
+                if (courseDto.getCourseEnd() != null) {
+                    course.setCourseEnd(courseDto.getCourseEnd());
+                }
+                coursePersistence.create(course);
+                return true;
+            } else {
+                return false;
             }
         } catch (Exception e) {
             throw new ExceptionService("Could not update");
@@ -148,7 +154,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void deleteTeacherFromCourse(Integer courseId, Integer teacherId) throws ExceptionService {
+    public boolean deleteTeacherFromCourse(Integer courseId, Integer teacherId) throws ExceptionService {
         try {
             Optional<Course> course = Optional.ofNullable(coursePersistence.findById(courseId));
             if (course.isPresent()){
@@ -160,9 +166,12 @@ public class CourseServiceImpl implements CourseService {
                     coursePersistence.create(course.get());
                     teacher.get().setCourse(null);
                     teacherPersistence.create(teacher.get());
+                    return true;
                 } else {
-                    throw new ExceptionService("The teacher is not registered in that course");
+                    return false;
                 }
+            } else {
+                return false;
             }
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
@@ -174,7 +183,6 @@ public class CourseServiceImpl implements CourseService {
         try {
             Optional<Teacher> teacher = Optional.ofNullable(teacherPersistence.findById(teacherId));
             Optional<Course> course = Optional.ofNullable(coursePersistence.findById(courseId));
-
             if (teacher.isPresent() && course.isPresent()){
                 if (teacher.get().getCourse() == null) {
                     Set<Teacher> teachers = course.get().getTeachers();
@@ -183,7 +191,6 @@ public class CourseServiceImpl implements CourseService {
 
                     coursePersistence.create(course.get());
                     teacherPersistence.create(teacher.get());
-
                 } else {
                     throw new ExceptionService("Teacher is already inside a course");
                 }
@@ -198,7 +205,6 @@ public class CourseServiceImpl implements CourseService {
         try {
             Optional<Subject> subject = Optional.ofNullable(subjectPersistence.findById(subjectId));
             Optional<Course> course = Optional.ofNullable(coursePersistence.findById(courseId));
-
             subject.ifPresent(s -> course.ifPresent(c -> c.getSubjects().add(s)));
             coursePersistence.create(course.get());
 

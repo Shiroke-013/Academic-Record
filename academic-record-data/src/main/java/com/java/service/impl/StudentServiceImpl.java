@@ -42,16 +42,17 @@ public class StudentServiceImpl implements StudentService {
             Student student = StudentMapper.INSTANCE.dtoToStudent(studentDto);
             studentPersistence.create(student);
         } catch (Exception e) {
-            throw new ExceptionService("Could not create the student");
+            throw new ExceptionService(e.getMessage());
         }
     }
 
     @Override
     public StudentDto findById(Integer id) throws ExceptionService {
         try {
-            return StudentMapper.INSTANCE.studentToDto(studentPersistence.findById(id));
+            Optional<Student> student = studentPersistence.findById(id);
+            return student.map(StudentMapper.INSTANCE::studentToDto).orElse(null);
         } catch (Exception e){
-            throw new ExceptionService("Could not find the student");
+            throw new ExceptionService(e.getMessage());
         }
     }
 
@@ -70,9 +71,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteById(Integer id) throws ExceptionService {
+    public boolean deleteById(Integer id) throws ExceptionService {
         try {
-            studentPersistence.delete(id);
+            if (studentPersistence.findById(id).isPresent()) {
+                studentPersistence.delete(id);
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e){
             throw new ExceptionService("Could not delete student with id: " + id);
         }
@@ -90,18 +96,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void update(StudentDto studentDto, Integer id) throws ExceptionService {
         try {
-            Student student = studentPersistence.findById(id);
-            if (studentDto.getFirstName() != null) {
-                student.setFirstName(studentDto.getFirstName());
-            }
-            if (studentDto.getLastName() != null) {
-                student.setLastName(studentDto.getLastName());
-            }
-            if (studentDto.getEmail() != null) {
-                student.setEmail(studentDto.getEmail());
-            }
-            if (studentDto.getPassword() != null) {
-                student.setPassword(studentDto.getPassword());
+            Optional<Student> student = studentPersistence.findById(id);
+            if (student.isPresent()) {
+                if (studentDto.getFirstName() != null) {
+                    student.get().setFirstName(studentDto.getFirstName());
+                }
+                if (studentDto.getLastName() != null) {
+                    student.get().setLastName(studentDto.getLastName());
+                }
+                if (studentDto.getEmail() != null) {
+                    student.get().setEmail(studentDto.getEmail());
+                }
+                if (studentDto.getPassword() != null) {
+                    student.get().setPassword(studentDto.getPassword());
+                }
             }
         } catch (Exception e) {
             throw new ExceptionService("Could not update");
@@ -121,7 +129,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void registerIntoCourse(Integer studentId, Integer courseId) throws ExceptionService {
         try {
-            Optional<Student> student = Optional.ofNullable(studentPersistence.findById(studentId));
+            Optional<Student> student = studentPersistence.findById(studentId);
             Optional<Course> course = Optional.ofNullable(coursePersistence.findById(courseId));
             if (student.isPresent() && course.isPresent()) {
                 if (student.get().getCourse() == null){
@@ -141,7 +149,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void registerIntoSubject(Integer studentId, Integer subjectId) throws ExceptionService {
         try {
-            Optional<Student> student = Optional.ofNullable(studentPersistence.findById(studentId));
+            Optional<Student> student = studentPersistence.findById(studentId);
             if (student.isPresent() && student.get().getCourse() != null) {
                 Optional<Subject> subject = Optional.ofNullable(subjectPersistence.findById(subjectId));
                 if (subject.isPresent() && subject.get().getSubjectName().equalsIgnoreCase(student.get().getCourse().getCourseName())){
@@ -167,7 +175,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public String findCourse(Integer id) throws ExceptionService {
         try {
-            Optional<Student> student = Optional.ofNullable(studentPersistence.findById(id));
+            Optional<Student> student = studentPersistence.findById(id);
             return student.get().getCourse().getCourseName();
         } catch (Exception e){
             throw new ExceptionService("Could not find the student courses");
@@ -177,7 +185,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Collection<String> findAllSubjects(Integer id) throws ExceptionService {
         try {
-            Optional<Student> student = Optional.ofNullable(studentPersistence.findById(id));
+            Optional<Student> student = studentPersistence.findById(id);
             Set<String> subjects = new HashSet<>();
             if (student.isPresent()) {
                 for (Subject subject : student.get().getSubjects()) {

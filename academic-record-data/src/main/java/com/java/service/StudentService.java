@@ -12,7 +12,7 @@ public interface StudentService<T> {
 
     Collection<T> findAll() throws ExceptionService;
 
-    void deleteById(Integer id) throws ExceptionService;
+    boolean deleteById(Integer id) throws ExceptionService;
 
     void deleteAll() throws ExceptionService;
 

@@ -26,21 +26,17 @@ public class StudentPersistenceImpl implements StudentPersistence {
         try {
             studentRepository.save(student);
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to create student");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
     @Override
-    public Student findById(Integer id) throws ExceptionPersistence {
+    public Optional<Student> findById(Integer id) throws ExceptionPersistence {
         try {
-            Optional<Student> student = studentRepository.findById(id);
-            if (student.isPresent()){
-                return student.get();
-            }
+            return studentRepository.findById(id);
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to find student with id: " + id);
+            throw new ExceptionPersistence(e.getMessage());
         }
-        return new Student();
     }
 
     @Override
@@ -48,7 +44,7 @@ public class StudentPersistenceImpl implements StudentPersistence {
         try {
             return studentRepository.findAll();
         } catch (Exception e) {
-            throw new ExceptionPersistence("Failed to get all students");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -58,7 +54,7 @@ public class StudentPersistenceImpl implements StudentPersistence {
             Optional<Student> student = studentRepository.findById(id);
             student.ifPresent(value -> studentRepository.delete(value));
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to delete Student with id: " + id);
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -67,7 +63,7 @@ public class StudentPersistenceImpl implements StudentPersistence {
         try {
             studentRepository.deleteAll();
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to delete all Students");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -76,7 +72,7 @@ public class StudentPersistenceImpl implements StudentPersistence {
         try {
             studentRepository.save(student);
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to update student with id: " + student.getId());
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 

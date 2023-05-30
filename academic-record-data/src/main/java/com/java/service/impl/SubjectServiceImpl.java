@@ -51,12 +51,9 @@ public class SubjectServiceImpl implements SubjectService {
     public Collection<SubjectDto> findAll() throws ExceptionService {
         try {
             Collection<Subject> subjects = subjectPersistence.findAll();
-            Set<SubjectDto> subjectDtos = new HashSet<>();
-
-            for (Subject subject : subjects) {
-                subjectDtos.add(SubjectMapper.INSTANCE.subjectToDto(subject));
-            }
-            return subjectDtos;
+            return subjects.stream()
+                    .map(SubjectMapper.INSTANCE::subjectToDto)
+                    .collect(Collectors.toSet());
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
         }
@@ -67,7 +64,7 @@ public class SubjectServiceImpl implements SubjectService {
         try {
             subjectPersistence.deleteAll();
         } catch (Exception e){
-            throw new ExceptionService("Could not delete all subjects");
+            throw new ExceptionService(e.getMessage());
         }
     }
 
@@ -76,7 +73,7 @@ public class SubjectServiceImpl implements SubjectService {
         try {
             subjectPersistence.delete(id);
         } catch (Exception e){
-            throw new ExceptionService("Could not delete student with id: " + id);
+            throw new ExceptionService(e.getMessage());
         }
     }
 
@@ -101,7 +98,7 @@ public class SubjectServiceImpl implements SubjectService {
             }
             subjectPersistence.update(subject);
         } catch (Exception e) {
-            throw new ExceptionService("Could not update");
+            throw new ExceptionService(e.getMessage());
         }
     }
 

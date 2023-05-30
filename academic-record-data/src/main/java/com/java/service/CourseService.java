@@ -16,7 +16,7 @@ public interface CourseService<T> {
 
     void deleteById(Integer id) throws ExceptionService;
 
-    void update(CourseDto courseDto, Integer id) throws ExceptionService;
+    boolean update(CourseDto courseDto, Integer id) throws ExceptionService;
 
     Collection<T> findTeachers(Integer id) throws ExceptionService;
 
@@ -24,7 +24,7 @@ public interface CourseService<T> {
 
     Collection<T> findSubjects(Integer id) throws ExceptionService;
 
-    void deleteTeacherFromCourse(Integer courseId, Integer teacherId) throws ExceptionService;
+    boolean deleteTeacherFromCourse(Integer courseId, Integer teacherId) throws ExceptionService;
 
     void addTeacher(Integer courseId, Integer teacherId) throws ExceptionService;
 

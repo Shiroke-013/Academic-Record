@@ -26,7 +26,7 @@ public class GradePersistenceImpl implements GradePersistence {
         try {
             gradeRepository.save(grade);
         } catch (Exception e) {
-            throw new ExceptionPersistence("Failed to create Teacher");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -35,7 +35,7 @@ public class GradePersistenceImpl implements GradePersistence {
         try {
             return gradeRepository.findAll();
         } catch (Exception e) {
-            throw new ExceptionPersistence("There's no teachers");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ public class GradePersistenceImpl implements GradePersistence {
         try {
             gradeRepository.deleteById(id);
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not delete Grade with id: " + id);
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class GradePersistenceImpl implements GradePersistence {
                 gradeRepository.deleteAll();
             }
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not delete Grades");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ public class GradePersistenceImpl implements GradePersistence {
         try {
             gradeRepository.save(grade);
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not update Grade");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 }

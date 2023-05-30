@@ -27,7 +27,7 @@ public class SubjectPersistenceImpl implements SubjectPersistence {
         try {
             subjectRepository.save(subject);
         } catch (Exception e) {
-            throw new ExceptionPersistence("Failed to create Subject");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -36,7 +36,7 @@ public class SubjectPersistenceImpl implements SubjectPersistence {
         try {
             return subjectRepository.findAll();
         } catch (Exception e) {
-            throw new ExceptionPersistence("There's no subjects");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public class SubjectPersistenceImpl implements SubjectPersistence {
         try {
             subjectRepository.deleteById(id);
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not delete");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public class SubjectPersistenceImpl implements SubjectPersistence {
                 subjectRepository.deleteAll();
             }
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not delete");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ public class SubjectPersistenceImpl implements SubjectPersistence {
         try {
             subjectRepository.save(subject);
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not update");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 }

@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -52,12 +53,9 @@ public class TeacherServiceImpl implements TeacherService {
     public Collection<TeacherDto> findAll() throws ExceptionService {
         try{
             Collection<Teacher> teachers = teacherPersistence.findAll();
-            Set<TeacherDto> teacherDtos = new HashSet<>();
-
-            for (Teacher teacher : teachers) {
-                teacherDtos.add(TeacherMapper.INSTANCE.teacherToDto(teacher));
-            }
-            return teacherDtos;
+            return  teachers.stream()
+                    .map(TeacherMapper.INSTANCE::teacherToDto)
+                    .collect(Collectors.toSet());
         }catch (Exception e){
             throw new ExceptionService(e.getMessage());
         }
@@ -128,12 +126,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Object findSubjects(Integer id) throws ExceptionService {
         try {
-            Set<String> subjects = new HashSet<>();
             Teacher teacher = teacherPersistence.findById(id);
-            for (Subject subject : teacher.getSubjects()) {
-                subjects.add(subject.getSubjectName());
-            }
-            return subjects;
+            return teacher.getSubjects().stream()
+                    .map(Subject::getSubjectName)
+                    .collect(Collectors.toSet());
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
         }
@@ -143,7 +139,7 @@ public class TeacherServiceImpl implements TeacherService {
     public void addGrade(GradeDto gradeDto, Integer subjectId, Integer studentId) throws ExceptionService {
         try {
             Grade grade = GradeMapper.INSTANCE.dtoToGrade(gradeDto);
-            Optional<Student> student = Optional.ofNullable(studentPersistence.findById(studentId));
+            Optional<Student> student = studentPersistence.findById(studentId);
             Optional<Subject> subject = Optional.ofNullable(subjectPersistence.findById(subjectId));
 
             if (student.isPresent() && subject.isPresent()) {

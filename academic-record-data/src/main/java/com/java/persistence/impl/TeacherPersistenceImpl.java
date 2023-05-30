@@ -56,7 +56,7 @@ public class TeacherPersistenceImpl implements TeacherPersistence {
         try {
             teacherRepository.deleteById(id);
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not delete Teacher with id: " + id);
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ public class TeacherPersistenceImpl implements TeacherPersistence {
                 teacherRepository.deleteAll();
             }
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not delete Teachers");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -76,7 +76,7 @@ public class TeacherPersistenceImpl implements TeacherPersistence {
         try {
             teacherRepository.save(teacher);
         } catch (Exception e) {
-            throw new ExceptionPersistence("Could not update Teacher");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
