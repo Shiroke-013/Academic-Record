@@ -120,7 +120,7 @@ class TeacherControllerTest {
         when(teacherService.findById(1)).thenThrow(new ExceptionService(SOMETHING_HAPPENED));
 
         mockMvc.perform(MockMvcRequestBuilders.get(TEACHER_CONTROLLER_PATH + "1"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isUnprocessableEntity());
 
         verify(teacherService, atLeastOnce()).findById(1);
     }
@@ -193,7 +193,7 @@ class TeacherControllerTest {
         doThrow(new SecurityException(SOMETHING_HAPPENED)).when(teacherService).deleteById(1);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(TEACHER_CONTROLLER_PATH + "1"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isUnprocessableEntity());
 
         verify(teacherService, atLeastOnce()).deleteById(1);
     }
@@ -221,29 +221,4 @@ class TeacherControllerTest {
 
         verify(teacherService, atLeastOnce()).delete();
     }
-
-    /*
-    @DisplayName("Update Teacher")
-    @Test
-    void updateTeacherTest() throws Exception {
-
-        Teacher teacher = new Teacher();
-        teacher.setId(1);
-        teacher.setFirstName("Andres");
-        teacher.setLastName("Chaves");
-        teacher.setEmail("andres@kai.com");
-        teacher.setPassword("1234567890");
-
-        TeacherDto teacherDto = new TeacherDto();
-        teacherDto.setPassword("test4echo!");
-
-        Integer id = 1;
-
-        when(teacherService.update(teacherDto, id));
-
-        mockMvc.perform(MockMvcRequestBuilders.delete(TEACHER_CONTROLLER_PATH + 1))
-                .andExpect(status().isOk());
-
-        verify(teacherService, atLeastOnce()).update(teacherDto, id);
-    }*/
 }

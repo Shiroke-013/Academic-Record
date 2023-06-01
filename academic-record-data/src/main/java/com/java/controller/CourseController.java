@@ -42,7 +42,7 @@ public class CourseController {
             courseService.save(subjectDto);
             return new ResponseEntity<>("Course was successfully created.",HttpStatus.CREATED);
         } catch (Exception e){
-            String errorMessage = ERROR_MESSAGE + e.getMessage();
+            String errorMessage = ERROR_MESSAGE + "Unable to create course";
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -105,9 +105,9 @@ public class CourseController {
     }
 
     @PatchMapping("{id}")
-    ResponseEntity<Object> update(@Valid @RequestBody CourseDto subjectDto, @PathVariable Integer id) {
+    ResponseEntity<Object> update(@Valid @RequestBody CourseDto courseDto, @PathVariable Integer id) {
         try {
-            if (courseService.update(subjectDto, id)){
+            if (courseService.update(courseDto, id)){
                 return new ResponseEntity<>("Course updated with success", HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(NO_COURSE_FOUND + id, HttpStatus.NOT_FOUND);

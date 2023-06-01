@@ -2,6 +2,7 @@ package com.java.service;
 
 
 import com.java.dto.TeacherDto;
+import com.java.mappers.TeacherMapper;
 import com.java.model.Teacher;
 import com.java.persistence.TeacherPersistence;
 import com.java.service.impl.TeacherServiceImpl;
@@ -82,7 +83,8 @@ class TeacherServiceTest {
 
         when(teacherPersistence.findById(1)).thenReturn(teacher1);
 
-        Teacher result = teacherServiceImpl.findById(1);
+        TeacherDto teacherDto = teacherServiceImpl.findById(1);
+        Teacher result = TeacherMapper.INSTANCE.dtoToTeacher(teacherDto);
         assertEquals(teacher1, result);
 
     }
@@ -112,7 +114,13 @@ class TeacherServiceTest {
 
         when(teacherPersistence.findAll()).thenReturn(teachers);
 
-        Collection<Teacher> result = teacherServiceImpl.findAll();
+        Collection<TeacherDto> teacherDtoSet = teacherServiceImpl.findAll();
+        Collection<Teacher> result = null;
+
+        for (TeacherDto teacherDto : teacherDtoSet) {
+            result.add(TeacherMapper.INSTANCE.dtoToTeacher(teacherDto));
+        }
+
         assertEquals(teachers, result);
 
     }
