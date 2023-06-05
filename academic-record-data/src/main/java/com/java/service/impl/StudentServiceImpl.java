@@ -16,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -60,11 +60,9 @@ public class StudentServiceImpl implements StudentService {
     public Collection<StudentDto> findAll() throws ExceptionService {
         try {
             Collection<Student> students = studentPersistence.findAll();
-            Set<StudentDto> studentDtos = new HashSet<>();
-            for (Student student : students){
-                studentDtos.add(StudentMapper.INSTANCE.studentToDto(student));
-            }
-            return studentDtos;
+            return students.stream()
+                    .map(StudentMapper.INSTANCE::studentToDto)
+                    .collect(Collectors.toSet());
         } catch (Exception e){
             throw new ExceptionService(e.getMessage());
         }
@@ -117,16 +115,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Object calculateAverage() throws ExceptionService {
-        return null;
-    }
-
-    @Override
-    public Object howMuchToGetInFinalExam() throws ExceptionService {
-        return null;
-    }
-
-    @Override
     public void registerIntoCourse(Integer studentId, Integer courseId) throws ExceptionService {
         try {
             Optional<Student> student = studentPersistence.findById(studentId);
@@ -152,7 +140,7 @@ public class StudentServiceImpl implements StudentService {
             Optional<Student> student = studentPersistence.findById(studentId);
             if (student.isPresent() && student.get().getCourse() != null) {
                 Optional<Subject> subject = Optional.ofNullable(subjectPersistence.findById(subjectId));
-                if (subject.isPresent() && subject.get().getSubjectName().equalsIgnoreCase(student.get().getCourse().getCourseName())){
+                if (subject.isPresent() && subject.get().getCourses().contains(student.get().getCourse())){
                     Set<Subject> subjects = student.get().getSubjects();
                     subjects.add(subject.get());
                     Set<Student> students = subject.get().getStudents();
@@ -186,16 +174,11 @@ public class StudentServiceImpl implements StudentService {
     public Collection<String> findAllSubjects(Integer id) throws ExceptionService {
         try {
             Optional<Student> student = studentPersistence.findById(id);
-            Set<String> subjects = new HashSet<>();
-            if (student.isPresent()) {
-                for (Subject subject : student.get().getSubjects()) {
-                    subjects.add(subject.getSubjectName());
-                }
-            }
-            return subjects;
+            return  student.get().getSubjects().stream()
+                    .map(Subject::getSubjectName)
+                    .collect(Collectors.toSet());
         } catch (Exception e){
-            throw new ExceptionService("Could not find the student subjects");
+            throw new ExceptionService(e.getMessage());
         }
     }
-
 }

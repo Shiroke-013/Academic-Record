@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,23 +21,35 @@ public interface CourseMapper {
     CourseDto courseToDto(Course student);
 
     default Set<String> mapStudentsToStudentNames(Set<Student> students) {
-        return students.stream()
-                .map(student -> student.getId() + ": "
-                        + student.getFirstName() + " " + student.getLastName())
-                .collect(Collectors.toSet());
+        if (!students.isEmpty()){
+            return students.stream()
+                    .map(student -> student.getId() + ": "
+                            + student.getFirstName() + " " + student.getLastName())
+                    .collect(Collectors.toSet());
+        } else {
+            return new HashSet<>();
+        }
     }
 
     default Set<String> mapSubjectsToSubjectsNames(Set<Subject> subjects) {
-        return subjects.stream()
-                .map(subject -> subject.getId() + " " + subject.getSubjectName())
-                .collect(Collectors.toSet());
+        if (!subjects.isEmpty()){
+            return subjects.stream()
+                    .map(subject -> subject.getId() + " " + subject.getSubjectName())
+                    .collect(Collectors.toSet());
+        } else {
+            return new HashSet<>();
+        }
     }
 
     default Set<String> mapCoursesToCoursesNames(Set<Teacher> teachers) {
-        return teachers.stream()
-                .map(teacher -> teacher.getId() + " "
-                        + teacher.getFirstName() + " " + teacher.getLastName())
-                .collect(Collectors.toSet());
+        if (!teachers.isEmpty()){
+            return teachers.stream()
+                    .map(teacher -> teacher.getId() + " "
+                            + teacher.getFirstName() + " " + teacher.getLastName())
+                    .collect(Collectors.toSet());
+        } else {
+            return new HashSet<>();
+        }
     }
 
 

@@ -18,10 +18,6 @@ public interface StudentService<T> {
 
     void update(StudentDto studentDto, Integer id) throws ExceptionService;
 
-    T calculateAverage() throws ExceptionService;
-
-    T howMuchToGetInFinalExam() throws ExceptionService;
-
     void registerIntoCourse(Integer studentId, Integer courseId) throws ExceptionService;
 
     void registerIntoSubject(Integer studentId, Integer subjectId) throws ExceptionService;
