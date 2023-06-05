@@ -2,17 +2,17 @@ package com.java.service;
 
 import com.java.dto.GradeDto;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface GradeService<T> {
 
-    T save(GradeDto gradeDto) throws ExceptionService;
+    void save(GradeDto gradeDto) throws ExceptionService;
 
     T findById(Integer id) throws ExceptionService;
 
-    Set<T> findAll() throws ExceptionService;
+    Collection<T> findAll() throws ExceptionService;
 
-    void delete() throws ExceptionService;
+    void deleteAll() throws ExceptionService;
 
     void deleteById(Integer id) throws ExceptionService;
 

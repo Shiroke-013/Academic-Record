@@ -1,18 +1,39 @@
 package com.java.dto;
 
-import com.java.model.BaseEntity;
-import com.java.model.Student;
-import com.java.model.Subject;
-import lombok.Getter;
-import lombok.Setter;
+import javax.validation.constraints.NotEmpty;
 
 
-@Getter
-@Setter
-public class GradeDto extends BaseEntity {
+public class GradeDto {
 
-    private Integer calification;
-    private Student student;
-    private Subject subject;
+    @NotEmpty(message = "Mark is required")
+    private Double mark;
 
+    private Integer studentId;
+    private Integer subjectId;
+
+    public GradeDto() { /* Empty Constructor */}
+
+    public Double getMark() {
+        return mark;
+    }
+
+    public void setMark(Double mark) {
+        this.mark = mark;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
+    public Integer getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
+    }
 }

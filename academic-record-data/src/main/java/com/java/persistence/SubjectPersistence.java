@@ -1,22 +1,21 @@
 package com.java.persistence;
 
-import com.java.dto.SubjectDto;
 import com.java.model.Subject;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface SubjectPersistence {
 
-    void create(Subject subject);
+    void create(Subject subject) throws ExceptionPersistence;
 
-    Set<Subject> getAll();
+    Collection<Subject> findAll() throws ExceptionPersistence;
 
-    Subject findById(Integer id);
+    Subject findById(Integer id) throws ExceptionPersistence;
 
-    void delete(Integer id);
+    void delete(Integer id) throws ExceptionPersistence;
 
-    void deleteAll();
+    void deleteAll() throws ExceptionPersistence;
 
-    void update(SubjectDto subjectDto, Integer id);
+    void update(Subject subject) throws ExceptionPersistence;
 
 }

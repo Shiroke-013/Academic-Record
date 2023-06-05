@@ -8,7 +8,7 @@ public interface TeacherPersistence {
 
     void create(Teacher teacher) throws ExceptionPersistence;
 
-    Collection<Teacher> getAll() throws ExceptionPersistence;
+    Collection<Teacher> findAll() throws ExceptionPersistence;
 
     Teacher findById(Integer id) throws ExceptionPersistence;
 
@@ -16,6 +16,6 @@ public interface TeacherPersistence {
 
     void delete() throws ExceptionPersistence;
 
-    void update(Teacher teacher, Integer id) throws ExceptionPersistence;
+    void update(Teacher teacher) throws ExceptionPersistence;
 
 }

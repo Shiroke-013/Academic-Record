@@ -1,35 +1,45 @@
 package com.java.model;
 
-import com.java.dto.TeacherDto;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
+
 @Entity
 @Table(name = "teacher")
 public class Teacher extends User {
 
-    public Teacher(TeacherDto teacherDto, Date createdAt) {
-        this.setFirstName(teacherDto.getFirstName());
-        this.setLastName(teacherDto.getLastName());
-        this.setEmail(teacherDto.getEmail());
-        this.setPassword(teacherDto.getPassword());
-        this.setCreatedAt(createdAt);
+    @OneToMany(mappedBy = "teacher")
+    private Set<Subject> subjects = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+    public Teacher(String firstName, String lastName, String email, String password) {
+        super(firstName, lastName, email, password);
     }
 
-    public Teacher(String firstName, String lastname, String email, String password){
-        this.setFirstName(firstName);
-        this.setLastName(lastname);
-        this.setEmail(email);
-        this.setPassword(password);
-        this.setCreatedAt(new Date());
+    public Teacher() { super(); }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
     }
 
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }

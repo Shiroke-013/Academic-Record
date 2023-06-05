@@ -1,46 +1,57 @@
 package com.java.model;
 
-import com.java.dto.StudentDto;
-import com.sun.tools.javac.util.List;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
+
 @Entity
 @Table(name = "student")
 public class Student extends User {
 
     @OneToMany(mappedBy = "student")
-    private List<Grade> grades;
+    private Set<Grade> grades = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "stu_course",
-        joinColumns =
-                { @JoinColumn(name = "student_id", referencedColumnName = "id") },
-        inverseJoinColumns =
-                { @JoinColumn(name = "course_id", referencedColumnName = "id") })
+    @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
 
-    public Student(String firstName, String lastname, String email, String password){
-        this.setFirstName(firstName);
-        this.setLastName(lastname);
-        this.setEmail(email);
-        this.setPassword(password);
-        this.setCreatedAt(new Date());
+    @ManyToMany
+    @JoinTable(name = "student_subject",
+                joinColumns = @JoinColumn(name = "student_id"),
+                inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private Set<Subject> subjects = new HashSet<>();
+
+    public Student(){ /* Empty constructor*/ }
+
+    public Set<Grade> getGrades() {
+        return grades;
     }
 
-    public Student(StudentDto studentDto){
-        this.setFirstName(studentDto.getFirstName());
-        this.setLastName(studentDto.getLastName());
-        this.setEmail(studentDto.getEmail());
-        this.setPassword(studentDto.getPassword());
-        this.setCreatedAt(new Date());
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
 }

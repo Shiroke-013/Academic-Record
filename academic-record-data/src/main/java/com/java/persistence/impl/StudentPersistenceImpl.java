@@ -1,8 +1,6 @@
 package com.java.persistence.impl;
 
-import com.java.dto.StudentDto;
 import com.java.model.Student;
-import com.java.model.Subject;
 import com.java.persistence.ExceptionPersistence;
 import com.java.persistence.StudentPersistence;
 import com.java.persistence.repository.StudentRepository;
@@ -28,30 +26,26 @@ public class StudentPersistenceImpl implements StudentPersistence {
         try {
             studentRepository.save(student);
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to create student");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
     @Override
-    public Collection<Student> getAll() throws ExceptionPersistence {
+    public Optional<Student> findById(Integer id) throws ExceptionPersistence {
+        try {
+            return studentRepository.findById(id);
+        } catch (Exception e){
+            throw new ExceptionPersistence(e.getMessage());
+        }
+    }
+
+    @Override
+    public Collection<Student> findAll() throws ExceptionPersistence {
         try {
             return studentRepository.findAll();
-        } catch (Exception e){
-            throw new ExceptionPersistence("Failed to get all students");
+        } catch (Exception e) {
+            throw new ExceptionPersistence(e.getMessage());
         }
-    }
-
-    @Override
-    public Student findById(Integer id) throws ExceptionPersistence {
-        try {
-            Optional<Student> student = studentRepository.findById(id);
-            if (student.isPresent()){
-                return student.get();
-            }
-        } catch (Exception e){
-            throw new ExceptionPersistence("Failed to find student with id: " + id);
-        }
-        return new Student();
     }
 
     @Override
@@ -60,9 +54,8 @@ public class StudentPersistenceImpl implements StudentPersistence {
             Optional<Student> student = studentRepository.findById(id);
             student.ifPresent(value -> studentRepository.delete(value));
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to delete Student with id: " + id);
+            throw new ExceptionPersistence(e.getMessage());
         }
-
     }
 
     @Override
@@ -70,7 +63,7 @@ public class StudentPersistenceImpl implements StudentPersistence {
         try {
             studentRepository.deleteAll();
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to delete all Students");
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
@@ -79,17 +72,8 @@ public class StudentPersistenceImpl implements StudentPersistence {
         try {
             studentRepository.save(student);
         } catch (Exception e){
-            throw new ExceptionPersistence("Failed to update student with id: " + student.getId());
+            throw new ExceptionPersistence(e.getMessage());
         }
     }
 
-    @Override
-    public Student findByLastName(String lastName) {
-        return null;
-    }
-
-    @Override
-    public Collection<Subject> findAllSubjects(Integer id) {
-        return null;
-    }
 }
