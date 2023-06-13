@@ -11,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -46,12 +45,9 @@ public class GradeServiceImpl implements GradeService {
     public Collection<GradeDto> findAll() throws ExceptionService {
         try {
             Collection<Grade> grades = gradePersistence.findAll();
-            Set<GradeDto> gradeDtos = new HashSet<>();
-
-            for (Grade grade : grades) {
-                gradeDtos.add(GradeMapper.INSTANCE.gradeToDto(grade));
-            }
-            return gradeDtos;
+            return grades.stream()
+                    .map(GradeMapper.INSTANCE::gradeToDto)
+                    .collect(Collectors.toSet());
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
         }
@@ -81,8 +77,8 @@ public class GradeServiceImpl implements GradeService {
             Grade grade = gradePersistence.findById(id);
             if (gradeDto.getMark() != null){
                 grade.setMark(gradeDto.getMark());
+                gradePersistence.create(grade);
             }
-            gradePersistence.create(grade);
         } catch (Exception e) {
             throw new ExceptionService("Could not update");
         }

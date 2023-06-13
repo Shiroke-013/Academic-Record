@@ -9,6 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,15 +24,23 @@ public interface SubjectMapper {
     SubjectDto subjectToDto(Subject subject);
 
     default Set<String> mapStudentsToStudentNames(Set<Student> students) {
-        return students.stream()
-                .map(student -> student.getFirstName() + " " + student.getLastName())
-                .collect(Collectors.toSet());
+        if (!students.isEmpty()) {
+            return students.stream()
+                    .map(student -> student.getFirstName() + " " + student.getLastName())
+                    .collect(Collectors.toSet());
+        } else {
+            return new HashSet<>();
+        }
     }
 
     default Set<String> mapCoursesToCourseNames(Set<Course> courses) {
-        return courses.stream()
-                .map(Course::getCourseName)
-                .collect(Collectors.toSet());
+        if (!courses.isEmpty()) {
+            return courses.stream()
+                    .map(Course::getCourseName)
+                    .collect(Collectors.toSet());
+        } else {
+            return new HashSet<>();
+        }
     }
 
     default String mapTeacherToTeacherName(Teacher teacher) {

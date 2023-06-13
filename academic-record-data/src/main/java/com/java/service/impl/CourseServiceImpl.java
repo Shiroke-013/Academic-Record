@@ -56,11 +56,10 @@ public class CourseServiceImpl implements CourseService {
     public Collection<CourseDto> findAll() throws ExceptionService {
         try {
             Collection<Course> courses = coursePersistence.findAll();
-            Set<CourseDto> courseDtos = new HashSet<>();
-            for (Course course : courses) {
-                courseDtos.add(CourseMapper.INSTANCE.courseToDto(course));
-            }
-            return courseDtos;
+            return courses.stream()
+                    .map(CourseMapper.INSTANCE::courseToDto)
+                    .collect(Collectors.toSet());
+
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
         }
@@ -146,7 +145,7 @@ public class CourseServiceImpl implements CourseService {
             return course.map(Course::getSubjects)
                     .orElse(Collections.emptySet())
                     .stream()
-                    .map(subject -> subject.getSubjectName() + ", capacidad: " + subject.getCapacity().toString())
+                    .map(subject -> subject.getSubjectName() + ", capacity: " + subject.getCapacity().toString())
                     .collect(Collectors.toSet());
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
@@ -188,7 +187,6 @@ public class CourseServiceImpl implements CourseService {
                     Set<Teacher> teachers = course.get().getTeachers();
                     teachers.add(teacher.get());
                     teacher.get().setCourse(course.get());
-
                     coursePersistence.create(course.get());
                     teacherPersistence.create(teacher.get());
                 } else {
@@ -207,7 +205,6 @@ public class CourseServiceImpl implements CourseService {
             Optional<Course> course = Optional.ofNullable(coursePersistence.findById(courseId));
             subject.ifPresent(s -> course.ifPresent(c -> c.getSubjects().add(s)));
             coursePersistence.create(course.get());
-
         } catch (Exception e) {
             throw new ExceptionService(e.getMessage());
         }

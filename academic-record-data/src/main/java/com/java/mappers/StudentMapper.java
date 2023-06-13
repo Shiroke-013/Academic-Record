@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,9 +22,13 @@ public interface StudentMapper {
     StudentDto studentToDto(Student student);
 
     default Set<String> mapGradesToAllGrades(Set<Grade> grades) {
-        return grades.stream()
-                .map(grade -> grade.getSubject().getId() + ": " + grade.getMark().toString())
-                .collect(Collectors.toSet());
+        if (!grades.isEmpty()){
+            return grades.stream()
+                    .map(grade -> grade.getSubject().getId() + ": " + grade.getMark().toString())
+                    .collect(Collectors.toSet());
+        } else {
+            return new HashSet<>();
+        }
     }
 
     default String mapCourseToCourseName(Course course) {
