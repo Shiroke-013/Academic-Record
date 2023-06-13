@@ -36,10 +36,9 @@ public class GradeController {
     @GetMapping("{id}")
     ResponseEntity<Object> findById(@PathVariable Integer id) throws Exception {
         try {
-            GradeDto grade = (GradeDto) gradeService.findById(id);
-            if (grade != null){
-                gradeService.findById(id);
-                return new ResponseEntity<>(grade, HttpStatus.OK);
+            GradeDto gradeDto = (GradeDto) gradeService.findById(id);
+            if (gradeDto != null){
+                return new ResponseEntity<>(gradeDto, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("No grade found", HttpStatus.NOT_FOUND);
             }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 
 
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.Collection;
 
 @RequestMapping("/teacher/")
 @RestController
@@ -42,7 +42,7 @@ public class TeacherController {
             teacherService.save(teacherDto);
             return new ResponseEntity<>("The teacher was successfully created.",HttpStatus.CREATED);
         } catch (Exception e){
-            String errorMessage = ERROR_MESSAGE + e.getMessage();
+            String errorMessage = ERROR_MESSAGE + "We are unable to create the teacher";
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -114,11 +114,11 @@ public class TeacherController {
     @GetMapping("subjects/{id}")
     public ResponseEntity<Object> findSubjects(@PathVariable Integer id) {
         try {
-            Set<String> subjects = (Set<String>) teacherService.findSubjects(id);
+            Collection<String> subjects = (Collection<String>) teacherService.findSubjects(id);
             if (subjects.isEmpty()){
-                return new ResponseEntity<>("No subjects found for this teacher",HttpStatus.OK);
+                return new ResponseEntity<>("No subjects found for this teacher", HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(teacherService.findSubjects(id), HttpStatus.OK);
+                return new ResponseEntity<>(subjects, HttpStatus.OK);
             }
         } catch (Exception e) {
             String errorMessage = ERROR_MESSAGE + "Unable to find subject/s for teacher with id: " + id;
@@ -126,13 +126,13 @@ public class TeacherController {
         }
     }
 
-    @PostMapping("/add/grade/{studentId}/{subjectId}")
+    @PostMapping("add/grade/{studentId}/{subjectId}")
     public ResponseEntity<Object> addGrade(@RequestBody GradeDto gradeDto, @PathVariable Integer studentId, @PathVariable Integer subjectId) {
         try {
             if (studentService.findById(studentId) == null) {
-                return new ResponseEntity<>("Student does not exist", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Student does not exist", HttpStatus.OK);
             } else if (subjectService.findById(subjectId) == null) {
-                return new ResponseEntity<>("Subject with id" + subjectId + "does not exist", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Subject with id" + subjectId + "does not exist", HttpStatus.OK);
             } else {
                 teacherService.addGrade(gradeDto, studentId, subjectId);
                 return new ResponseEntity<>("Grade added to student: " + subjectId, HttpStatus.CREATED);

@@ -45,17 +45,21 @@ public class StudentController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Object> findById(@PathVariable Integer id) {
+    public ResponseEntity<Object> findById(@PathVariable String id) {
         try {
-            StudentDto studentDto = (StudentDto) studentService.findById(id);
+            Integer studentId = Integer.parseInt(id);
+            StudentDto studentDto = (StudentDto) studentService.findById(studentId);
             if (studentDto != null) {
-                return new ResponseEntity<>(studentService.findById(id), HttpStatus.OK);
+                return new ResponseEntity<>(studentDto, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Student with id: " + id + " does not exits.", HttpStatus.NOT_FOUND);
             }
-        } catch (Exception e){
+        } catch (NumberFormatException e) {
             String errorMessage = ERROR_MESSAGE + "Please give a valid identifier (integer)";
-            return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+        } catch (Exception e){
+            String errorMessage = ERROR_MESSAGE + "while processing the request";
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -101,7 +105,7 @@ public class StudentController {
             return new ResponseEntity<>("Student was updated successfully", HttpStatus.OK);
         } catch (Exception e) {
             String errorMessage = ERROR_MESSAGE + "Could not update student";
-            return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
         }
     }
 
