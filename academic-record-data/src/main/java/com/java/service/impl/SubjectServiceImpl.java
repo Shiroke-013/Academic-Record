@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -117,7 +116,7 @@ public class SubjectServiceImpl implements SubjectService {
                     subjectPersistence.create(subject.get());
                     teacherPersistence.create(teacher.get());
                 } else {
-                    throw new ExceptionService("Teacher is not register in the subject course");
+                    throw new ExceptionService("Teacher is not registered in the subject course.");
                 }
             }
         } catch (Exception e) {
