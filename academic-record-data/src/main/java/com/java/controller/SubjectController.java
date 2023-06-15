@@ -94,7 +94,7 @@ public class SubjectController {
             subjectService.addTeacher(subjectId, teacherId);
             return new ResponseEntity<>("Teacher assigned to subject",HttpStatus.CREATED);
         } catch (Exception e) {
-            String errorMessage = ERROR_MESSAGE + "Not possible to assign teacher to subject";
+            String errorMessage = ERROR_MESSAGE + "Not possible to assign teacher to subject " + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }

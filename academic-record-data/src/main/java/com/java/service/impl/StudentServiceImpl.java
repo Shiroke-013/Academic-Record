@@ -141,16 +141,54 @@ public class StudentServiceImpl implements StudentService {
             if (student.isPresent() && student.get().getCourse() != null) {
                 Optional<Subject> subject = Optional.ofNullable(subjectPersistence.findById(subjectId));
                 if (subject.isPresent() && subject.get().getCourses().contains(student.get().getCourse())){
-                    Set<Subject> subjects = student.get().getSubjects();
-                    subjects.add(subject.get());
-                    Set<Student> students = subject.get().getStudents();
-                    students.add(student.get());
 
-                    student.get().setSubjects(subjects);
-                    subject.get().setStudents(students);
+                    Set<Subject> subjectsOfDay = student.get().getSubjects().stream()
+                            .filter(s -> s.getDay() == subject.get().getDay())
+                            .collect(Collectors.toSet());
 
-                    studentPersistence.create(student.get());
-                    subjectPersistence.create(subject.get());
+                    if (!subjectsOfDay.isEmpty()){
+                        String message = "The student has already a subject at that time and can't register the new subject.";
+                        for (Subject studentSubject : subjectsOfDay) {
+                            int start = subject.get().getStartTime().compareTo(studentSubject.getStartTime());
+                            int end = subject.get().getEndTime().compareTo(studentSubject.getEndTime());
+                            int startEnd = subject.get().getStartTime().compareTo(studentSubject.getEndTime());
+                            int endStart = subject.get().getEndTime().compareTo(studentSubject.getStartTime());
+                            if (start == 0 && end == 0){
+                                throw new ExceptionService(message);
+                            }
+                            if (start > 0 && end < 0) {
+                                throw new ExceptionService(message);
+                            }
+                            if (start < 0 && (endStart > 0 && end < 0)) {
+                                throw new ExceptionService(message);
+                            }
+                            if (start > 0 && (startEnd < 0 && end > 0)) {
+                                throw new ExceptionService(message);
+                            }
+                        }
+                        Set<Subject> subjects = student.get().getSubjects();
+                        subjects.add(subject.get());
+                        Set<Student> students = subject.get().getStudents();
+                        students.add(student.get());
+
+                        student.get().setSubjects(subjects);
+                        subject.get().setStudents(students);
+
+                        studentPersistence.create(student.get());
+                        subjectPersistence.create(subject.get());
+                    } else {
+                        Set<Subject> subjects = student.get().getSubjects();
+                        subjects.add(subject.get());
+                        Set<Student> students = subject.get().getStudents();
+                        students.add(student.get());
+
+                        student.get().setSubjects(subjects);
+                        subject.get().setStudents(students);
+
+                        studentPersistence.create(student.get());
+                        subjectPersistence.create(subject.get());
+                    }
+
                 } else {
                     throw new ExceptionService("The subject you tried to register into, does not belong to your Course");
                 }

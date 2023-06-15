@@ -126,7 +126,7 @@ public class StudentController {
             studentService.registerIntoSubject(studentId, subjectId);
             return new ResponseEntity<>("Student was successfully registered in subject with id: " + subjectId, HttpStatus.CREATED);
         } catch (Exception e) {
-            String errorMessage = ERROR_MESSAGE + "Not possible to register student into subject.";
+            String errorMessage = ERROR_MESSAGE + "Not possible to register student into subject. " + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -108,13 +108,48 @@ public class SubjectServiceImpl implements SubjectService {
             Optional<Subject> subject = Optional.ofNullable(subjectPersistence.findById(subjectId));
             if (subject.isPresent() && teacher.isPresent()){
                 if (subject.get().getCourses().contains(teacher.get().getCourse())) {
-                    subject.ifPresent(s -> s.setTeacher(teacher.get()));
 
-                    subject.get().setTeacher(teacher.get());
-                    teacher.ifPresent(t -> t.getSubjects().add(subject.get()));
+                    Set<Subject> subjectsOfDay = teacher.get().getSubjects().stream()
+                                    .filter(t -> t.getDay() == subject.get().getDay())
+                                    .collect(Collectors.toSet());
 
-                    subjectPersistence.create(subject.get());
-                    teacherPersistence.create(teacher.get());
+                    if (!subjectsOfDay.isEmpty()) {
+                        String message = "The teacher has already a subject at that time and can't be in charge of the new subject.";
+                        for (Subject teacherSubject : subjectsOfDay) {
+                            int start = subject.get().getStartTime().compareTo(teacherSubject.getStartTime());
+                            int end = subject.get().getEndTime().compareTo(teacherSubject.getEndTime());
+                            int startEnd = subject.get().getStartTime().compareTo(teacherSubject.getEndTime());
+                            int endStart = subject.get().getEndTime().compareTo(teacherSubject.getStartTime());
+                            if (start == 0 && end == 0){
+                                throw new ExceptionService(message);
+                            }
+                            if (start > 0 && end < 0) {
+                                throw new ExceptionService(message);
+                            }
+                            if (start < 0 && (endStart > 0 && end < 0)) {
+                                throw new ExceptionService(message);
+                            }
+                            if (start > 0 && (startEnd < 0 && end > 0)) {
+                                throw new ExceptionService(message);
+                            }
+                        }
+
+                        subject.ifPresent(s -> s.setTeacher(teacher.get()));
+
+                        subject.get().setTeacher(teacher.get());
+                        teacher.ifPresent(t -> t.getSubjects().add(subject.get()));
+
+                        subjectPersistence.create(subject.get());
+                        teacherPersistence.create(teacher.get());
+                    } else {
+                        subject.ifPresent(s -> s.setTeacher(teacher.get()));
+
+                        subject.get().setTeacher(teacher.get());
+                        teacher.ifPresent(t -> t.getSubjects().add(subject.get()));
+
+                        subjectPersistence.create(subject.get());
+                        teacherPersistence.create(teacher.get());
+                    }
                 } else {
                     throw new ExceptionService("Teacher is not registered in the subject course.");
                 }
