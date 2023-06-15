@@ -1,7 +1,10 @@
 package com.java.dto;
 
+import com.java.enums.Day;
+
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 
@@ -17,6 +20,12 @@ public class SubjectDto {
     private LocalDate startDate;
     @NotEmpty(message = "End date is required")
     private LocalDate endDate;
+    @NotEmpty(message = "Start time is required")
+    private LocalTime startTime;
+    @NotEmpty(message = "End time is required")
+    private LocalTime endTime;
+    @NotEmpty
+    private Day day;
     private Set<String> studentsNames;
     private Set<String> coursesNames;
     private String teacherName;
@@ -61,6 +70,30 @@ public class SubjectDto {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Day getDay() {
+        return day;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
     }
 
     public Set<String> getStudentsNames() {

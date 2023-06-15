@@ -1,5 +1,6 @@
 package com.java.model;
 
+import com.java.enums.Day;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
@@ -9,6 +10,7 @@ import jakarta.persistence.Table;
 
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +24,9 @@ public class Subject extends BaseEntity{
     private Integer capacity;
     private LocalDate startDate;
     private LocalDate endDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private Day day;
 
     @ManyToMany(mappedBy = "subjects")
     private Set<Student> students = new HashSet<>();
@@ -74,6 +79,30 @@ public class Subject extends BaseEntity{
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Day getDay() {
+        return day;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
     }
 
     public Set<Student> getStudents() {
